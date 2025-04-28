@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             TierSeeder::class,
+            BonusTypeSeeder::class,
+            RelicSeeder::class,
         ]);
     }
 }

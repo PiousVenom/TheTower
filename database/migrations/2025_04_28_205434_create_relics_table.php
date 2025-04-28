@@ -22,7 +22,14 @@ return new class extends Migration {
     {
         Schema::create('relics', static function (Blueprint $table): void {
             $table->id();
+            $table->foreignId('tier_id')->constrained('tiers')->cascadeOnDelete();
+            $table->string('name');
+            $table->foreignId('bonus_type_id')->constrained('bonus_types')->cascadeOnDelete();
+            $table->decimal('value');
+            $table->boolean('unlocked')->default(false);
+            $table->string('unlocked_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 };

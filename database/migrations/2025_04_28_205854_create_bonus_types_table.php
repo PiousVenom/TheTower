@@ -22,7 +22,9 @@ return new class extends Migration {
     {
         Schema::create('bonus_types', static function (Blueprint $table): void {
             $table->id();
+            $table->string('name');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 };
