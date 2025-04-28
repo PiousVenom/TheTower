@@ -1,7 +1,8 @@
 <?php
 
-return [
+declare(strict_types=1);
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -101,7 +102,11 @@ return [
 
     'previous_keys' => [
         ...array_filter(
-            explode(',', env('APP_PREVIOUS_KEYS', ''))
+            explode(
+                ',',                       // separator
+                (string) env('APP_PREVIOUS_KEYS', '') // <-- cast guarantees string
+            ),
+            static fn (string $v): bool => $v !== ''  // <-- explicit, strict callback
         ),
     ],
 
@@ -120,7 +125,6 @@ return [
 
     'maintenance' => [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
-        'store' => env('APP_MAINTENANCE_STORE', 'database'),
+        'store'  => env('APP_MAINTENANCE_STORE', 'database'),
     ],
-
 ];
