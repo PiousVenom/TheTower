@@ -15,17 +15,35 @@ class BonusTypeSeeder extends Seeder
     public function run(): void
     {
         $types = [
-            'Attack Speed', 'Cash', 'Coins', 'Crit Chance', 'Crit Factor',
-            'Damage', 'Damage / Meter', 'Defense Absolute', 'Free Attack Upgrade',
-            'Free Defense Upgrade', 'Free Utility Upgrade', 'Health', 'Health Regen', 'Lab Speed',
-            'Orb Speed', 'Recovery Amount', 'Super Critical Chance', 'Super Critical Mult',
-            'Thorns', 'Ultimate Damage', 'Wall Rebuild', 'Bot Range', 'Enemy Attack Level Skip'
+            ['name' => 'Attack Speed'],
+            ['name' => 'Cash'],
+            ['name' => 'Coins'],
+            ['name' => 'Crit Chance'],
+            ['name' => 'Crit Factor'],
+            ['name' => 'Damage'],
+            ['name' => 'Damage / Meter'],
+            ['name' => 'Defense Absolute'],
+            ['name' => 'Free Attack Upgrade'],
+            ['name' => 'Free Defense Upgrade'],
+            ['name' => 'Free Utility Upgrade'],
+            ['name' => 'Health'],
+            ['name' => 'Health Regen'],
+            ['name' => 'Lab Speed'],
+            ['name' => 'Orb Speed'],
+            ['name' => 'Recovery Amount'],
+            ['name' => 'Super Critical Chance'],
+            ['name' => 'Super Critical Mult'],
+            ['name' => 'Thorns'],
+            ['name' => 'Ultimate Damage'],
+            ['name' => 'Wall Rebuild'],
+            ['name' => 'Bot Range'],
+            ['name' => 'Enemy Attack Level Skip'],
         ];
 
         sort($types);
 
-        foreach ($types as $name) {
-            BonusType::factory()->create($name);
+        foreach ($types as $type) {
+            BonusType::factory()->create($type);
         }
     }
 }
