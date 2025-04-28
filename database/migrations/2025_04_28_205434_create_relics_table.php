@@ -26,7 +26,6 @@ return new class extends Migration {
             $table->string('name');
             $table->foreignId('bonus_type_id')->constrained('bonus_types')->cascadeOnDelete();
             $table->decimal('value');
-            $table->boolean('unlocked')->default(false);
             $table->string('unlocked_by')->nullable();
             $table->timestamps();
             $table->softDeletes();

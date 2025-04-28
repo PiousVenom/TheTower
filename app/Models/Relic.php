@@ -19,7 +19,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $name
  * @property int    $bonus_type_id
  * @property float  $value
- * @property bool   $unlocked
  * @property string $unlocked_by
  *
  * Relationships:
@@ -27,6 +26,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property BonusType $bonusType
  *
  * @mixin Eloquent
+ *
+ * @method static \Database\Factories\RelicFactory                    factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Relic newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Relic newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Relic onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Relic query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Relic withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Relic withoutTrashed()
+ *
+ * @mixin \Eloquent
  */
 class Relic extends Model
 {
@@ -39,7 +48,6 @@ class Relic extends Model
         'name',
         'bonus_type_id',
         'value',
-        'unlocked',
         'unlocked_by',
     ];
 

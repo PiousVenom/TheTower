@@ -22,6 +22,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Collection<int, Relic> $relics
  *
  * @mixin Eloquent
+ *
+ * @property int|null $relics_count
+ *
+ * @method static \Database\Factories\TierFactory                    factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Tier newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Tier newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Tier onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Tier query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Tier withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Tier withoutTrashed()
+ *
+ * @mixin \Eloquent
  */
 class Tier extends Model
 {

@@ -22,6 +22,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Collection|Relic[] $relics
  *
  * @mixin Eloquent
+ *
+ * @property int|null $relics_count
+ *
+ * @method static \Database\Factories\BonusTypeFactory                    factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusType onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusType query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusType withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|BonusType withoutTrashed()
+ *
+ * @mixin \Eloquent
  */
 class BonusType extends Model
 {
