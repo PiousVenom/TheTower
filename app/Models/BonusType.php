@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
-use Database\Factories\TierFactory;
+use Database\Factories\BonusTypeFactory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,19 +13,19 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Tier.
+ * Class BonusType.
  *
  * @property int    $id
  * @property string $name
  *
  * Relationships:
- * @property Collection<int, Relic> $relics
+ * @property Collection|Relic[] $relics
  *
  * @mixin Eloquent
  */
-class Tier extends Model
+class BonusType extends Model
 {
-    /** @use HasFactory<TierFactory> */
+    /** @use HasFactory<BonusTypeFactory> */
     use HasFactory;
     use SoftDeletes;
 
