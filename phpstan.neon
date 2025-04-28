@@ -1,0 +1,59 @@
+includes:
+    # Larastan core rules & Laravel stubs
+    - vendor/nunomaduro/larastan/extension.neon
+    # Extra strictness
+    - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+
+parameters:
+    # Highest possible level (currently 9)
+    level: max
+
+    ## Project paths to analyse
+    paths:
+        - app
+        - bootstrap
+        - config
+        - database
+        - routes
+        - tests
+
+    ## Common‑sense exclusions (generated, vendor & runtime files)
+    excludePaths:
+        analyse:
+            - storage/*
+            - bootstrap/cache/*
+            - vendor/*
+            - public/*
+            - database/migrations/*
+            - database/factories/*
+
+    ## Strict flags
+    checkMissingIterableValueType:   true
+    checkDuplicateArrayKeys:         true
+    checkGenericClassInNonGenericObjectType: true
+    checkExplicitMixed:              true
+    checkMissingVarTagTypehint:      true
+    treatPhpDocTypesAsCertain:       true
+    reportMaybes:                    true
+    reportUninitializedProperties:   true
+    checkAlwaysTrueCheckTypeFunctionCall: true
+    checkFunctionNameCase:           true
+    bleedingEdge:                    true
+
+    ## Helper stubs (optional – if you generate them with barryvdh/laravel-ide-helper)
+    scanFiles:
+        - _ide_helper.php
+
+    ## Common Laravel‑specific false‑positives to ignore
+    ignoreErrors:
+        # Dynamic Eloquent properties (when not using strict getter stubs)
+        - "#^Property App\\Models\\[A-Za-z0-9_]+::\$[a-zA-Z0-9_]+ not found\.#"
+        # Macros or dynamic methods on Illuminate classes
+        - "#^Call to an undefined method Illuminate\\[\\A-Za-z0-9_\\\\]+::[a-zA-Z0-9_]+\(\)#"
+        # Undeclared static properties created via magic methods
+        - "#^Access to undeclared static property Illuminate\\.*#"
+
+    ## Performance
+    parallel:
+        maxProcesses: 4
