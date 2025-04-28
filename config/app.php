@@ -102,7 +102,11 @@ return [
 
     'previous_keys' => [
         ...array_filter(
-            explode(',', env('APP_PREVIOUS_KEYS', ''))
+            explode(
+                ',',                       // separator
+                (string) env('APP_PREVIOUS_KEYS', '') // <-- cast guarantees string
+            ),
+            static fn (string $v): bool => $v !== ''  // <-- explicit, strict callback
         ),
     ],
 

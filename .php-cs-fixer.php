@@ -52,7 +52,7 @@ return (new Config())
         'protected_to_private'                     => true,
         'no_superfluous_phpdoc_tags'               => ['remove_inheritdoc' => true],
         'phpdoc_to_param_type'                     => true,
-        'phpdoc_to_property_type'                  => true,
+        'phpdoc_to_property_type'                  => false,
         'phpdoc_to_return_type'                    => true,
         'psr_autoloading'                          => ['dir' => __DIR__.'/app'],
         'ordered_class_elements'                   => [

@@ -13,7 +13,7 @@
         "spatie/laravel-permission": "^6.17.0"
     },
     "require-dev": {
-        "barryvdh/laravel-ide-helper": "^v3.5.5",
+        "barryvdh/laravel-ide-helper": "^v3.5.5asdfsadfsasadf",
         "fakerphp/faker": "^v1.24.1",
         "friendsofphp/php-cs-fixer": "^3.75",
         "larastan/larastan": "^v3.4.0",
@@ -22,6 +22,8 @@
         "laravel/sail": "^1.41",
         "mockery/mockery": "^1.6.12",
         "nunomaduro/collision": "^v8.8.0",
+        "phpstan/phpstan-deprecation-rules": "^2.0",
+        "phpstan/phpstan-strict-rules": "^2.0",
         "phpunit/phpunit": "^11.5.18"
     },
     "autoload": {
