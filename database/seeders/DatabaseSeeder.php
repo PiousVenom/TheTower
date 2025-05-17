@@ -15,9 +15,11 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            BonusCategorySeeder::class,
             TierSeeder::class,
             BonusTypeSeeder::class,
             RelicSeeder::class,
+            RelicBonusSeeder::class,
         ]);
     }
 }

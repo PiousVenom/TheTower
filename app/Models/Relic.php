@@ -6,36 +6,49 @@ namespace App\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Database\Factories\RelicFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 /**
- * Class Relic.
+ * Class Relic
  *
- * @property int    $id
- * @property int    $tier_id
+ * Represents a unique relic that players can own or discover.
+ * A relic belongs to a single Tier and (currently) carries exactly one bonus
+ * defined via the relic_bonus pivot table. The pivot table enforces
+ * a UNIQUE(relic_id) constraint so that only one bonus exists today, while
+ * still allowing the schema to evolve to many‑to‑many later with a single
+ * migration that drops that unique key.
+ *
+ * @property int $id
  * @property string $name
- * @property int    $bonus_type_id
- * @property float  $value
- * @property string $unlocked_by
+ * @property int $tier_id
+ * @property string|null $unlock_condition
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
  *
  * Relationships:
- * @property Tier      $tier
- * @property BonusType $bonusType
+ * @property-read Tier $tier
+ * @property-read Collection<int,BonusType> $bonuses
+ * @property-read BonusType|null $bonus (dynamic accessor)
  *
  * @mixin Eloquent
  *
- * @method static \Database\Factories\RelicFactory                    factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Relic newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Relic newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Relic onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Relic query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Relic withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Relic withoutTrashed()
+ * @method static RelicFactory          factory($count = null, $state = [])
+ * @method static Builder<static>|Relic newModelQuery()
+ * @method static Builder<static>|Relic newQuery()
+ * @method static Builder<static>|Relic onlyTrashed()
+ * @method static Builder<static>|Relic query()
+ * @method static Builder<static>|Relic withTrashed()
+ * @method static Builder<static>|Relic withoutTrashed()
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class Relic extends Model
 {
@@ -43,31 +56,51 @@ class Relic extends Model
     use HasFactory;
     use SoftDeletes;
 
+    /**
+     * Mass‑assignable attributes.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
-        'tier_id',
         'name',
-        'bonus_type_id',
-        'value',
-        'unlocked_by',
+        'tier_id',
+        'unlock_condition',
     ];
 
+    /* ----------------------------------------------------------------- */
+    /* Relationships                                                     */
+    /* ----------------------------------------------------------------- */
+
     /**
-     * One-to-one: the BonusType this Relic belongs to.
+     * Tier to which this relic belongs.
      *
-     * @return HasOne<BonusType, $this>
+     * @return BelongsTo<Tier, $this>
      */
-    public function bonusType(): HasOne
+    public function tier(): BelongsTo
     {
-        return $this->hasOne(BonusType::class);
+        return $this->belongsTo(Tier::class);
     }
 
     /**
-     * One-to-one: the Tier this Relic belongs to.
+     * Bonus types linked via relic_bonus pivot.
      *
-     * @return HasOne<Tier, $this>
+     * @return BelongsToMany<BonusType, $this>
      */
-    public function tier(): HasOne
+    public function bonuses(): BelongsToMany
     {
-        return $this->hasOne(Tier::class);
+        return $this->belongsToMany(
+            BonusType::class,
+            'relic_bonus'
+        )->withPivot(['value'])
+            ->using(RelicBonus::class);
+    }
+
+    /**
+     * Convenience accessor for the *single* bonus a relic has today.
+     * @return BonusType|null
+     */
+    public function bonus(): ?BonusType
+    {
+        return $this->bonuses()->first();
     }
 }

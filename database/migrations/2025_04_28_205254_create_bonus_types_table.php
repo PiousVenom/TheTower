@@ -22,7 +22,18 @@ return new class extends Migration {
     {
         Schema::create('bonus_types', static function (Blueprint $table): void {
             $table->id();
-            $table->string('name');
+
+            $table->foreignId('bonus_category_id')
+                ->nullable()
+                ->constrained('bonus_categories')
+                ->nullOnDelete();
+
+            $table->string('name')->unique();
+            $table->enum('unit',[
+               'percentage',
+               'flat',
+               'seconds'
+            ]);
             $table->timestamps();
             $table->softDeletes();
         });
