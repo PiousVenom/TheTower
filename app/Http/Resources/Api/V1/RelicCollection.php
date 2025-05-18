@@ -18,6 +18,7 @@ class RelicCollection extends ResourceCollection
     {
         /** @var array<string,mixed> $array */
         $array = parent::toArray($request);
+
         return $array; // cast narrows the return type for Larastan
     }
 }

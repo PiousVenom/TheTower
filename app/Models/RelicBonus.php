@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Barryvdh\LaravelIdeHelper\Eloquent;
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
@@ -13,19 +13,20 @@ use Illuminate\Support\Carbon;
 
 /**
  * Class RelicBonus.
- * 
+ *
  * Pivot model that links a Relic to exactly one BonusType and stores the
  * **value** of that bonus for the relic.
  *
- * @property int $id
- * @property int $relic_id
- * @property int $bonus_type_id
- * @property numeric $value
+ * @property int         $id
+ * @property int         $relic_id
+ * @property int         $bonus_type_id
+ * @property numeric     $value
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
- * @property-read \App\Models\BonusType $bonusType
- * @property-read \App\Models\Relic $relic
+ * @property BonusType   $bonusType
+ * @property Relic       $relic
+ *
  * @method static Builder<static>|RelicBonus newModelQuery()
  * @method static Builder<static>|RelicBonus newQuery()
  * @method static Builder<static>|RelicBonus onlyTrashed()
@@ -39,7 +40,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|RelicBonus whereValue($value)
  * @method static Builder<static>|RelicBonus withTrashed()
  * @method static Builder<static>|RelicBonus withoutTrashed()
- * @mixin \Eloquent
+ *
+ * @mixin Eloquent
  */
 class RelicBonus extends Pivot
 {

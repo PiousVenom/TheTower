@@ -18,7 +18,7 @@ class RelicResource extends JsonResource
     /**
      * Disable the default "data" key for single resources.
      */
-    public static $wrap = null;
+    public static $wrap;
 
     /** @return array<string,mixed> */
     public function toArray(Request $request): array

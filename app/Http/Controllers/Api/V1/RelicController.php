@@ -10,8 +10,6 @@ use App\Http\Requests\UpdateRelicRequest;
 use App\Http\Resources\Api\V1\RelicCollection;
 use App\Http\Resources\Api\V1\RelicResource;
 use App\Models\Relic;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Response as Http;
@@ -121,7 +119,7 @@ class RelicController extends Controller
 
             // Get the bonus type ID and value
             $bonusTypeId = $validated['bonus_type_id'] ?? $relic->bonuses()->first()?->id;
-            $bonusValue = $validated['value'] ?? $relic->bonuses()->first()?->pivot?->value;
+            $bonusValue  = $validated['value'] ?? $relic->bonuses()->first()?->pivot?->value;
 
             if ($bonusTypeId !== null && $bonusValue !== null) {
                 // Attach new / same type with possibly new value
