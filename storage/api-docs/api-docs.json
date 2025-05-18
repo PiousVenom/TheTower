@@ -827,9 +827,9 @@
         "/profileBanners/{id}": {
             "get": {
                 "tags": [
-                    "ProfileBanners"
+                    "Profile Banners"
                 ],
-                "summary": "Get a profileBanner",
+                "summary": "Get a profile banner",
                 "description": "Retrieve a single profileBanner.",
                 "operationId": "2c284d72438c8a699b0fa3d5b21d8ab8",
                 "parameters": [
@@ -861,10 +861,10 @@
             },
             "delete": {
                 "tags": [
-                    "ProfileBanners"
+                    "Profile Banners"
                 ],
-                "summary": "Delete profileBanner",
-                "description": "Soft-delete a profileBanner.",
+                "summary": "Delete profile banner",
+                "description": "Soft-delete a profile banner.",
                 "operationId": "c331ed96990d64776bb17e6ebd4a9b59",
                 "parameters": [
                     {
@@ -888,9 +888,9 @@
             },
             "patch": {
                 "tags": [
-                    "ProfileBanners"
+                    "Profile Banners"
                 ],
-                "summary": "Update profileBanner",
+                "summary": "Update profile banner",
                 "description": "Update an existing profileBanner.",
                 "operationId": "6620de2108f88e54bbfb1a89331e2e89",
                 "parameters": [
@@ -915,7 +915,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Updated profileBanner",
+                        "description": "Updated profile banner",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -936,14 +936,14 @@
         "/profileBanners": {
             "get": {
                 "tags": [
-                    "ProfileBanners"
+                    "Profile Banners"
                 ],
-                "summary": "List profileBanners",
+                "summary": "List profile banners",
                 "description": "List profileBanners (paginated).",
                 "operationId": "e51086f79727f055aa35e51bccedaec9",
                 "responses": {
                     "200": {
-                        "description": "Paginated list of profileBanners",
+                        "description": "Paginated list of profile banners",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -956,9 +956,9 @@
             },
             "post": {
                 "tags": [
-                    "ProfileBanners"
+                    "Profile Banners"
                 ],
-                "summary": "Create profileBanner",
+                "summary": "Create profile banner",
                 "description": "Create a new profileBanner.",
                 "operationId": "1a2695d49d7ef308d5ddd1f2e954b31b",
                 "requestBody": {
@@ -991,9 +991,9 @@
         "/profileBanners/{id}/restore": {
             "patch": {
                 "tags": [
-                    "ProfileBanners"
+                    "Profile Banners"
                 ],
-                "summary": "Restore profileBanner",
+                "summary": "Restore profile banner",
                 "description": "Restore a soft-deleted profileBanner.",
                 "operationId": "7b6eb65b9a3156891413c9ba9acd33a9",
                 "parameters": [
@@ -1009,7 +1009,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Restored profileBanner",
+                        "description": "Restored profile banner",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3141,8 +3141,8 @@
             "description": "Manage available menus"
         },
         {
-            "name": "ProfileBanners",
-            "description": "Manage available profileBanners"
+            "name": "Profile Banners",
+            "description": "Manage available profile banners"
         },
         {
             "name": "Relics",

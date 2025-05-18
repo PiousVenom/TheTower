@@ -22,12 +22,12 @@ use Symfony\Component\HttpFoundation\Response;
 class ProfileBannerController extends Controller
 {
     /**
-     * Soft-delete a profileBanner.
+     * Soft-delete a profile banner.
      *
      * @OA\Delete(
      *     path="/profileBanners/{id}",
-     *     summary="Delete profileBanner",
-     *     tags={"ProfileBanners"},
+     *     summary="Delete profile banner",
+     *     tags={"Profile Banners"},
      *
      *     @OA\Parameter(
      *         name="id", in="path", required=true,
@@ -51,12 +51,12 @@ class ProfileBannerController extends Controller
      *
      * @OA\Get(
      *     path="/profileBanners",
-     *     summary="List profileBanners",
-     *     tags={"ProfileBanners"},
+     *     summary="List profile banners",
+     *     tags={"Profile Banners"},
      *
      *     @OA\Response(
      *         response=200,
-     *         description="Paginated list of profileBanners",
+     *         description="Paginated list of profile banners",
      *
      *         @OA\JsonContent(ref="#/components/schemas/ProfileBannerCollection")
      *     )
@@ -72,8 +72,8 @@ class ProfileBannerController extends Controller
      *
      * @OA\Patch(
      *     path="/profileBanners/{id}/restore",
-     *     summary="Restore profileBanner",
-     *     tags={"ProfileBanners"},
+     *     summary="Restore profile banner",
+     *     tags={"Profile Banners"},
      *
      *     @OA\Parameter(
      *         name="id", in="path", required=true,
@@ -83,7 +83,7 @@ class ProfileBannerController extends Controller
      *
      *     @OA\Response(
      *         response=200,
-     *         description="Restored profileBanner",
+     *         description="Restored profile banner",
      *
      *         @OA\JsonContent(ref="#/components/schemas/ProfileBannerResource")
      *     ),
@@ -115,8 +115,8 @@ class ProfileBannerController extends Controller
      *
      * @OA\Get(
      *     path="/profileBanners/{id}",
-     *     summary="Get a profileBanner",
-     *     tags={"ProfileBanners"},
+     *     summary="Get a profile banner",
+     *     tags={"Profile Banners"},
      *
      *     @OA\Parameter(
      *         name="id", in="path", required=true,
@@ -144,8 +144,8 @@ class ProfileBannerController extends Controller
      *
      * @OA\Post(
      *     path="/profileBanners",
-     *     summary="Create profileBanner",
-     *     tags={"ProfileBanners"},
+     *     summary="Create profile banner",
+     *     tags={"Profile Banners"},
      *
      *     @OA\RequestBody(
      *         required=true,
@@ -178,8 +178,8 @@ class ProfileBannerController extends Controller
      *
      * @OA\Patch(
      *     path="/profileBanners/{id}",
-     *     summary="Update profileBanner",
-     *     tags={"ProfileBanners"},
+     *     summary="Update profile banner",
+     *     tags={"Profile Banners"},
      *
      *     @OA\Parameter(
      *         name="id", in="path", required=true,
@@ -194,7 +194,7 @@ class ProfileBannerController extends Controller
      *
      *     @OA\Response(
      *         response=200,
-     *         description="Updated profileBanner",
+     *         description="Updated profile banner",
      *
      *         @OA\JsonContent(ref="#/components/schemas/ProfileBannerResource")
      *     ),
