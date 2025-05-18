@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\V1\StoreBonusCategoryRequest;
-use App\Http\Requests\Api\V1\UpdateBonusCategoryRequest;
-use App\Models\BonusCategory;
+use App\Http\Requests\Api\V1\StoreGuardianRequest;
+use App\Http\Requests\Api\V1\UpdateGuardianRequest;
+use App\Models\Guardian;
 
-class BonusCategoryController extends Controller
+class GuardianController extends Controller
 {
     /**
      * Show the form for creating a new resource.
@@ -21,14 +21,14 @@ class BonusCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BonusCategory $bonusCategory): void
+    public function destroy(Guardian $guardian): void
     {
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(BonusCategory $bonusCategory): void
+    public function edit(Guardian $guardian): void
     {
     }
 
@@ -42,21 +42,21 @@ class BonusCategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(BonusCategory $bonusCategory): void
+    public function show(Guardian $guardian): void
     {
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBonusCategoryRequest $request): void
+    public function store(StoreGuardianRequest $request): void
     {
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBonusCategoryRequest $request, BonusCategory $bonusCategory): void
+    public function update(UpdateGuardianRequest $request, Guardian $guardian): void
     {
     }
 }

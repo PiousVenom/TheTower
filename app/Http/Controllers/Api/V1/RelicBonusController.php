@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreRelicBonusRequest;
-use App\Http\Requests\UpdateRelicBonusRequest;
+use App\Http\Requests\Api\V1\StoreRelicBonusRequest;
+use App\Http\Requests\Api\V1\UpdateRelicBonusRequest;
 use App\Models\RelicBonus;
 
 class RelicBonusController extends Controller

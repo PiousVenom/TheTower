@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\V1\StoreBonusCategoryRequest;
-use App\Http\Requests\Api\V1\UpdateBonusCategoryRequest;
-use App\Models\BonusCategory;
+use App\Http\Requests\Api\V1\StoreTowerSkinRequest;
+use App\Http\Requests\Api\V1\UpdateTowerSkinRequest;
+use App\Models\TowerSkin;
 
-class BonusCategoryController extends Controller
+class TowerSkinController extends Controller
 {
     /**
      * Show the form for creating a new resource.
@@ -21,14 +21,14 @@ class BonusCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BonusCategory $bonusCategory): void
+    public function destroy(TowerSkin $towerSkin): void
     {
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(BonusCategory $bonusCategory): void
+    public function edit(TowerSkin $towerSkin): void
     {
     }
 
@@ -42,21 +42,21 @@ class BonusCategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(BonusCategory $bonusCategory): void
+    public function show(TowerSkin $towerSkin): void
     {
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBonusCategoryRequest $request): void
+    public function store(StoreTowerSkinRequest $request): void
     {
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBonusCategoryRequest $request, BonusCategory $bonusCategory): void
+    public function update(UpdateTowerSkinRequest $request, TowerSkin $towerSkin): void
     {
     }
 }

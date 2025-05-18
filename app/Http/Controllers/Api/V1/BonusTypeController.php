@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreBonusTypeRequest;
-use App\Http\Requests\UpdateBonusTypeRequest;
+use App\Http\Requests\Api\V1\StoreBonusTypeRequest;
+use App\Http\Requests\Api\V1\UpdateBonusTypeRequest;
 use App\Models\BonusType;
 
 class BonusTypeController extends Controller

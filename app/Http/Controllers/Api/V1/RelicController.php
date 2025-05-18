@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreRelicRequest;
-use App\Http\Requests\UpdateRelicRequest;
+use App\Http\Requests\Api\V1\StoreRelicRequest;
+use App\Http\Requests\Api\V1\UpdateRelicRequest;
 use App\Http\Resources\Api\V1\RelicCollection;
 use App\Http\Resources\Api\V1\RelicResource;
 use App\Models\Relic;
