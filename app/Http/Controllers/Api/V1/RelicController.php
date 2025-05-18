@@ -12,7 +12,6 @@ use App\Http\Resources\Api\V1\RelicResource;
 use App\Models\Relic;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Response as Http;
 
 /**
  *  Relic endpoints (API v1).
@@ -129,7 +128,7 @@ class RelicController extends Controller
         if (!$relic->trashed()) {
             return response()->json([
                 'message' => 'Relic is not deleted.',
-            ], Http::HTTP_CONFLICT);
+            ], Response::HTTP_CONFLICT);
         }
 
         $relic->restore();
