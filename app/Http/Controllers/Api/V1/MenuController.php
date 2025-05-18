@@ -7,56 +7,208 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\StoreMenuRequest;
 use App\Http\Requests\Api\V1\UpdateMenuRequest;
+use App\Http\Resources\Api\V1\MenuCollection;
+use App\Http\Resources\Api\V1\MenuResource;
 use App\Models\Menu;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @OA\Tag(
+ *     name="Menus",
+ *     description="Manage available menus"
+ * )
+ */
 class MenuController extends Controller
 {
     /**
-     * Show the form for creating a new resource.
+     * Soft-delete a menu.
+     *
+     * @OA\Delete(
+     *     path="/menus/{id}",
+     *     summary="Delete menu",
+     *     tags={"Menus"},
+     *
+     *     @OA\Parameter(
+     *         name="id", in="path", required=true,
+     *
+     *         @OA\Schema(type="integer", example=1)
+     *     ),
+     *
+     *     @OA\Response(response=204, description="Deleted"),
+     *     @OA\Response(response=404, description="Not found")
+     * )
      */
-    public function create(): void
+    public function destroy(Menu $menu): Response
     {
+        $menu->delete();
+
+        return response()->noContent();
     }
 
     /**
-     * Remove the specified resource from storage.
+     * List menus (paginated).
+     *
+     * @OA\Get(
+     *     path="/menus",
+     *     summary="List menus",
+     *     tags={"Menus"},
+     *
+     *     @OA\Response(
+     *         response=200,
+     *         description="Paginated list of menus",
+     *
+     *         @OA\JsonContent(ref="#/components/schemas/MenuCollection")
+     *     )
+     * )
      */
-    public function destroy(Menu $menu): void
+    public function index(): MenuCollection
     {
+        return new MenuCollection(Menu::paginate(50));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Restore a soft-deleted menu.
+     *
+     * @OA\Patch(
+     *     path="/menus/{id}/restore",
+     *     summary="Restore menu",
+     *     tags={"Menus"},
+     *
+     *     @OA\Parameter(
+     *         name="id", in="path", required=true,
+     *
+     *         @OA\Schema(type="integer", example=1)
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=200,
+     *         description="Restored menu",
+     *
+     *         @OA\JsonContent(ref="#/components/schemas/MenuResource")
+     *     ),
+     *
+     *     @OA\Response(response=409, description="Menu is not deleted"),
+     *     @OA\Response(response=404, description="Not found")
+     * )
      */
-    public function edit(Menu $menu): void
+    public function restore(int|string $id): JsonResponse
     {
+        $menu = Menu::withTrashed()->findOrFail($id);
+
+        if (!$menu->trashed()) {
+            return response()->json(
+                ['message' => 'Menu is not deleted.'],
+                Response::HTTP_CONFLICT
+            );
+        }
+
+        $menu->restore();
+
+        return response()->json(
+            new MenuResource($menu)
+        );
     }
 
     /**
-     * Display a listing of the resource.
+     * Retrieve a single menu.
+     *
+     * @OA\Get(
+     *     path="/menus/{id}",
+     *     summary="Get a menu",
+     *     tags={"Menus"},
+     *
+     *     @OA\Parameter(
+     *         name="id", in="path", required=true,
+     *
+     *         @OA\Schema(type="integer", example=1)
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=200,
+     *         description="Menu detail",
+     *
+     *         @OA\JsonContent(ref="#/components/schemas/MenuResource")
+     *     ),
+     *
+     *     @OA\Response(response=404, description="Not found")
+     * )
      */
-    public function index(): void
+    public function show(Menu $menu): MenuResource
     {
+        return new MenuResource($menu);
     }
 
     /**
-     * Display the specified resource.
+     * Create a new menu.
+     *
+     * @OA\Post(
+     *     path="/menus",
+     *     summary="Create menu",
+     *     tags={"Menus"},
+     *
+     *     @OA\RequestBody(
+     *         required=true,
+     *
+     *         @OA\JsonContent(ref="#/components/schemas/StoreMenuRequest")
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=201,
+     *         description="Created",
+     *
+     *         @OA\JsonContent(ref="#/components/schemas/MenuResource")
+     *     ),
+     *
+     *     @OA\Response(response=422, description="Validation error")
+     * )
      */
-    public function show(Menu $menu): void
+    public function store(StoreMenuRequest $request): JsonResponse
     {
+        $menu = Menu::create($request->validated());
+
+        return response()->json(
+            new MenuResource($menu),
+            Response::HTTP_CREATED
+        );
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Update an existing menu.
+     *
+     * @OA\Patch(
+     *     path="/menus/{id}",
+     *     summary="Update menu",
+     *     tags={"Menus"},
+     *
+     *     @OA\Parameter(
+     *         name="id", in="path", required=true,
+     *
+     *         @OA\Schema(type="integer", example=1)
+     *     ),
+     *
+     *     @OA\RequestBody(
+     *
+     *         @OA\JsonContent(ref="#/components/schemas/UpdateMenuRequest")
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=200,
+     *         description="Updated menu",
+     *
+     *         @OA\JsonContent(ref="#/components/schemas/MenuResource")
+     *     ),
+     *
+     *     @OA\Response(response=422, description="Validation error"),
+     *     @OA\Response(response=404, description="Not found")
+     * )
      */
-    public function store(StoreMenuRequest $request): void
+    public function update(UpdateMenuRequest $request, Menu $menu): JsonResponse
     {
-    }
+        $menu->update($request->validated());
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateMenuRequest $request, Menu $menu): void
-    {
+        return response()->json(
+            new MenuResource($menu->refresh())
+        );
     }
 }

@@ -418,6 +418,615 @@
                 }
             }
         },
+        "/guardians/{id}": {
+            "get": {
+                "tags": [
+                    "Guardians"
+                ],
+                "summary": "Get a guardian",
+                "description": "Retrieve a single guardian.",
+                "operationId": "047e192be5a0801ec0558d078ad0fc46",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Guardian detail",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GuardianResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Guardians"
+                ],
+                "summary": "Delete guardian",
+                "description": "Soft-delete a guardian.",
+                "operationId": "fdd0247f282a4a336c0de2ccc6817399",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Guardians"
+                ],
+                "summary": "Update guardian",
+                "description": "Update an existing guardian.",
+                "operationId": "50672f79a16f72257e4c987ba6225d10",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateGuardianRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated guardian",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GuardianResource"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/guardians": {
+            "get": {
+                "tags": [
+                    "Guardians"
+                ],
+                "summary": "List guardians",
+                "description": "List guardians (paginated).",
+                "operationId": "68beb576f44c06a01f1846ab6d1d5b32",
+                "responses": {
+                    "200": {
+                        "description": "Paginated list of guardians",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GuardianCollection"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Guardians"
+                ],
+                "summary": "Create guardian",
+                "description": "Create a new guardian.",
+                "operationId": "8b24d41ba56246e2374a71fdbb584834",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreGuardianRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GuardianResource"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/guardians/{id}/restore": {
+            "patch": {
+                "tags": [
+                    "Guardians"
+                ],
+                "summary": "Restore guardian",
+                "description": "Restore a soft-deleted guardian.",
+                "operationId": "196f13d001343cfcf4da12b842a478c8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Restored guardian",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GuardianResource"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Guardian is not deleted"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/menus/{id}": {
+            "get": {
+                "tags": [
+                    "Menus"
+                ],
+                "summary": "Get a menu",
+                "description": "Retrieve a single menu.",
+                "operationId": "3702f68603c17b4a04e5e5c35f31f5f4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Menu detail",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MenuResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Menus"
+                ],
+                "summary": "Delete menu",
+                "description": "Soft-delete a menu.",
+                "operationId": "60298d7d2d9100279e4904bc90ef15bf",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Menus"
+                ],
+                "summary": "Update menu",
+                "description": "Update an existing menu.",
+                "operationId": "e3ae92ff310432ca0784611b874a454b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateMenuRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated menu",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MenuResource"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/menus": {
+            "get": {
+                "tags": [
+                    "Menus"
+                ],
+                "summary": "List menus",
+                "description": "List menus (paginated).",
+                "operationId": "6a471d71b55cf04ae64844611e541c4a",
+                "responses": {
+                    "200": {
+                        "description": "Paginated list of menus",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MenuCollection"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Menus"
+                ],
+                "summary": "Create menu",
+                "description": "Create a new menu.",
+                "operationId": "919180cbe58d90b236fa054287c4cfcc",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreMenuRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MenuResource"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/menus/{id}/restore": {
+            "patch": {
+                "tags": [
+                    "Menus"
+                ],
+                "summary": "Restore menu",
+                "description": "Restore a soft-deleted menu.",
+                "operationId": "1c62f9c9208d82ac548b16ea17872aae",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Restored menu",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MenuResource"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Menu is not deleted"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/profileBanners/{id}": {
+            "get": {
+                "tags": [
+                    "ProfileBanners"
+                ],
+                "summary": "Get a profileBanner",
+                "description": "Retrieve a single profileBanner.",
+                "operationId": "2c284d72438c8a699b0fa3d5b21d8ab8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ProfileBanner detail",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProfileBannerResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "ProfileBanners"
+                ],
+                "summary": "Delete profileBanner",
+                "description": "Soft-delete a profileBanner.",
+                "operationId": "c331ed96990d64776bb17e6ebd4a9b59",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "ProfileBanners"
+                ],
+                "summary": "Update profileBanner",
+                "description": "Update an existing profileBanner.",
+                "operationId": "6620de2108f88e54bbfb1a89331e2e89",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateProfileBannerRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated profileBanner",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProfileBannerResource"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/profileBanners": {
+            "get": {
+                "tags": [
+                    "ProfileBanners"
+                ],
+                "summary": "List profileBanners",
+                "description": "List profileBanners (paginated).",
+                "operationId": "e51086f79727f055aa35e51bccedaec9",
+                "responses": {
+                    "200": {
+                        "description": "Paginated list of profileBanners",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProfileBannerCollection"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "ProfileBanners"
+                ],
+                "summary": "Create profileBanner",
+                "description": "Create a new profileBanner.",
+                "operationId": "1a2695d49d7ef308d5ddd1f2e954b31b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreProfileBannerRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProfileBannerResource"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/profileBanners/{id}/restore": {
+            "patch": {
+                "tags": [
+                    "ProfileBanners"
+                ],
+                "summary": "Restore profileBanner",
+                "description": "Restore a soft-deleted profileBanner.",
+                "operationId": "7b6eb65b9a3156891413c9ba9acd33a9",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Restored profileBanner",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProfileBannerResource"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "ProfileBanner is not deleted"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
         "/relics/{relic}": {
             "get": {
                 "tags": [
@@ -636,6 +1245,209 @@
                     },
                     "409": {
                         "description": "Relic is not deleted"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/songs/{id}": {
+            "get": {
+                "tags": [
+                    "Songs"
+                ],
+                "summary": "Get a song",
+                "description": "Retrieve a single song.",
+                "operationId": "a0187b84f0a6790cef394acb64b8cd1a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Song detail",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SongResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Songs"
+                ],
+                "summary": "Delete song",
+                "description": "Soft-delete a song.",
+                "operationId": "3c7f1dd92626ad1f86d40cef09534b20",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Songs"
+                ],
+                "summary": "Update song",
+                "description": "Update an existing song.",
+                "operationId": "fa98d6c9c9c76e242d50148aa3842d17",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateSongRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated song",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SongResource"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/songs": {
+            "get": {
+                "tags": [
+                    "Songs"
+                ],
+                "summary": "List songs",
+                "description": "List songs (paginated).",
+                "operationId": "0751edaebbf4754eea938a020909339d",
+                "responses": {
+                    "200": {
+                        "description": "Paginated list of songs",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SongCollection"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Songs"
+                ],
+                "summary": "Create song",
+                "description": "Create a new song.",
+                "operationId": "b7ea7730fabf1fb0142ca570702358b3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreSongRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SongResource"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/songs/{id}/restore": {
+            "patch": {
+                "tags": [
+                    "Songs"
+                ],
+                "summary": "Restore song",
+                "description": "Restore a soft-deleted song.",
+                "operationId": "0513d957cdeed83627e1d1f0603254e3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Restored song",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SongResource"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Song is not deleted"
                     },
                     "404": {
                         "description": "Not found"
@@ -1102,6 +1914,66 @@
                 },
                 "type": "object"
             },
+            "StoreGuardianRequest": {
+                "description": "Payload sent when creating a new Guardian",
+                "required": [
+                    "name",
+                    "value"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Epic Battle Theme"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.006
+                    }
+                },
+                "type": "object"
+            },
+            "StoreMenuRequest": {
+                "description": "Payload sent when creating a new Menu",
+                "required": [
+                    "name",
+                    "value"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Epic Battle Theme"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.006
+                    }
+                },
+                "type": "object"
+            },
+            "StoreProfileBannerRequest": {
+                "description": "Payload sent when creating a new ProfileBanner",
+                "required": [
+                    "name",
+                    "value"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Epic Battle Theme"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.006
+                    }
+                },
+                "type": "object"
+            },
             "StoreRelicRequest": {
                 "required": [
                     "name",
@@ -1134,6 +2006,26 @@
                         "type": "string",
                         "example": "Earn 350 medals Matrix event",
                         "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "StoreSongRequest": {
+                "description": "Payload sent when creating a new Song",
+                "required": [
+                    "name",
+                    "value"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Epic Battle Theme"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.006
                     }
                 },
                 "type": "object"
@@ -1221,6 +2113,54 @@
                 },
                 "type": "object"
             },
+            "UpdateGuardianRequest": {
+                "description": "Payload for updating an existing Guardian. All fields optional.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Epic Battle Theme Remix"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.007
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateMenuRequest": {
+                "description": "Payload for updating an existing Menu. All fields optional.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Epic Battle Theme Remix"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.007
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateProfileBannerRequest": {
+                "description": "Payload for updating an existing ProfileBanner. All fields optional.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Epic Battle Theme Remix"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.007
+                    }
+                },
+                "type": "object"
+            },
             "UpdateRelicRequest": {
                 "description": "Any subset of fields may be supplied to update the relic.",
                 "properties": {
@@ -1248,6 +2188,22 @@
                         "type": "string",
                         "example": "Earn 700 medals Matrix event",
                         "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateSongRequest": {
+                "description": "Payload for updating an existing Song. All fields optional.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Epic Battle Theme Remix"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.007
                     }
                 },
                 "type": "object"
@@ -1493,6 +2449,282 @@
                 },
                 "type": "object"
             },
+            "GuardianCollection": {
+                "description": "Paginated list of Guardians",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/GuardianResource"
+                        }
+                    },
+                    "links": {
+                        "properties": {
+                            "first": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/guardians?page=1"
+                            },
+                            "last": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/guardians?page=2"
+                            },
+                            "prev": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": null,
+                                "nullable": true
+                            },
+                            "next": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/guardians?page=2",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "meta": {
+                        "properties": {
+                            "current_page": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "from": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "last_page": {
+                                "type": "integer",
+                                "example": 2
+                            },
+                            "path": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/guardians"
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "to": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "total": {
+                                "type": "integer",
+                                "example": 100
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "GuardianResource": {
+                "description": "Represents a Guardian available in the API",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Muse"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.006
+                    }
+                },
+                "type": "object"
+            },
+            "MenuCollection": {
+                "description": "Paginated list of Menus",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/MenuResource"
+                        }
+                    },
+                    "links": {
+                        "properties": {
+                            "first": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/menus?page=1"
+                            },
+                            "last": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/menus?page=2"
+                            },
+                            "prev": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": null,
+                                "nullable": true
+                            },
+                            "next": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/menus?page=2",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "meta": {
+                        "properties": {
+                            "current_page": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "from": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "last_page": {
+                                "type": "integer",
+                                "example": 2
+                            },
+                            "path": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/menus"
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "to": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "total": {
+                                "type": "integer",
+                                "example": 100
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "MenuResource": {
+                "description": "Represents a Menu available in the API",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Dark Being"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.006
+                    }
+                },
+                "type": "object"
+            },
+            "ProfileBannerCollection": {
+                "description": "Paginated list of ProfileBanners",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ProfileBannerResource"
+                        }
+                    },
+                    "links": {
+                        "properties": {
+                            "first": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/profile-banners?page=1"
+                            },
+                            "last": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/profile-banners?page=2"
+                            },
+                            "prev": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": null,
+                                "nullable": true
+                            },
+                            "next": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/profile-banners?page=2",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "meta": {
+                        "properties": {
+                            "current_page": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "from": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "last_page": {
+                                "type": "integer",
+                                "example": 2
+                            },
+                            "path": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/profile-banners"
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "to": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "total": {
+                                "type": "integer",
+                                "example": 100
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "ProfileBannerResource": {
+                "description": "Represents a ProfileBanner available in the API",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Mech World"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.006
+                    }
+                },
+                "type": "object"
+            },
             "RelicBonusResource": {
                 "description": "Bonus as it appears on a relic (includes rolled value)",
                 "allOf": [
@@ -1609,6 +2841,98 @@
                         "items": {
                             "$ref": "#/components/schemas/RelicBonusResource"
                         }
+                    }
+                },
+                "type": "object"
+            },
+            "SongCollection": {
+                "description": "Paginated list of songs",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/SongResource"
+                        }
+                    },
+                    "links": {
+                        "properties": {
+                            "first": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/songs?page=1"
+                            },
+                            "last": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/songs?page=2"
+                            },
+                            "prev": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": null,
+                                "nullable": true
+                            },
+                            "next": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/songs?page=2",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "meta": {
+                        "properties": {
+                            "current_page": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "from": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "last_page": {
+                                "type": "integer",
+                                "example": 2
+                            },
+                            "path": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/songs"
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "to": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "total": {
+                                "type": "integer",
+                                "example": 100
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "SongResource": {
+                "description": "Represents a song available in the API",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Epic Battle Theme"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.006
                     }
                 },
                 "type": "object"
@@ -1809,8 +3133,24 @@
             "description": "CRUD & restore operations for bonus-type definitions"
         },
         {
+            "name": "Guardians",
+            "description": "Manage available guardians"
+        },
+        {
+            "name": "Menus",
+            "description": "Manage available menus"
+        },
+        {
+            "name": "ProfileBanners",
+            "description": "Manage available profileBanners"
+        },
+        {
             "name": "Relics",
             "description": "CRUD & restore operations for relics"
+        },
+        {
+            "name": "Songs",
+            "description": "Manage available songs"
         },
         {
             "name": "Tiers",

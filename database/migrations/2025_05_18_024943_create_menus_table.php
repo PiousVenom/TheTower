@@ -22,7 +22,10 @@ return new class extends Migration {
     {
         Schema::create('menus', static function (Blueprint $table): void {
             $table->id();
+            $table->string('name')->unique();
+            $table->decimal('value', 10, 4);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 };
