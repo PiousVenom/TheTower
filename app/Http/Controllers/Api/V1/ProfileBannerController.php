@@ -15,8 +15,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @OA\Tag(
- *     name="ProfileBanners",
- *     description="Manage available profileBanners"
+ *     name="Profile Banners",
+ *     description="Manage available profile banners"
  * )
  */
 class ProfileBannerController extends Controller
