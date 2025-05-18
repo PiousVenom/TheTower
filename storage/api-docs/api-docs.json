@@ -845,6 +845,209 @@
                     }
                 }
             }
+        },
+        "/tower-skins/{id}": {
+            "get": {
+                "tags": [
+                    "Tower Skins"
+                ],
+                "summary": "Get a tower skin",
+                "description": "Retrieve a single tower skin.",
+                "operationId": "745ebc4d903f64d0ee5a9dc2170c4371",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tower skin detail",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TowerSkinResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Tower Skins"
+                ],
+                "summary": "Delete tower skin",
+                "description": "Soft-delete a tower skin.",
+                "operationId": "20acb679873a55cfc298e7333159bdf2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Tower Skins"
+                ],
+                "summary": "Update tower skin",
+                "description": "Update an existing tower skin.",
+                "operationId": "4ca75b94098a8095ae45792690df7fc5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateTowerSkinRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated tower skin",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TowerSkinResource"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/tower-skins": {
+            "get": {
+                "tags": [
+                    "Tower Skins"
+                ],
+                "summary": "List tower skins",
+                "description": "List tower skins (paginated).",
+                "operationId": "5ec2006a213d56f4459c014aac4625ae",
+                "responses": {
+                    "200": {
+                        "description": "Paginated list of tower skins",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TowerSkinCollection"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Tower Skins"
+                ],
+                "summary": "Create tower skin",
+                "description": "Create a new tower skin.",
+                "operationId": "328c3ad218c801259f63fd929184672b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreTowerSkinRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TowerSkinResource"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/tower-skins/{id}/restore": {
+            "patch": {
+                "tags": [
+                    "Tower Skins"
+                ],
+                "summary": "Restore tower skin",
+                "description": "Restore a soft-deleted tower skin.",
+                "operationId": "ce8fd34da0ddb320fe442f44ce075b63",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Restored tower skin",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TowerSkinResource"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Tower skin is not deleted"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -948,6 +1151,31 @@
                 },
                 "type": "object"
             },
+            "StoreTowerSkinRequest": {
+                "description": "Payload sent when creating a new TowerSkin",
+                "required": [
+                    "name",
+                    "value"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Celestial Tower"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.75
+                    },
+                    "eventName": {
+                        "type": "string",
+                        "example": "Guild Season Finale",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
             "UpdateBackgroundSkinRequest": {
                 "description": "Payload for updating an existing BackgroundSkin. All fields optional.",
                 "properties": {
@@ -1031,6 +1259,27 @@
                         "type": "string",
                         "maxLength": 191,
                         "example": "Epic"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateTowerSkinRequest": {
+                "description": "Payload for updating an existing TowerSkin. All fields optional.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Celestial Tower Deluxe"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.85
+                    },
+                    "eventName": {
+                        "type": "string",
+                        "example": "Guild Season Finale",
+                        "nullable": true
                     }
                 },
                 "type": "object"
@@ -1450,6 +1699,103 @@
                     }
                 },
                 "type": "object"
+            },
+            "TowerSkinCollection": {
+                "description": "Paginated list of tower skins",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TowerSkinResource"
+                        }
+                    },
+                    "links": {
+                        "properties": {
+                            "first": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/tower-skins?page=1"
+                            },
+                            "last": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/tower-skins?page=4"
+                            },
+                            "prev": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": null,
+                                "nullable": true
+                            },
+                            "next": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/tower-skins?page=2",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "meta": {
+                        "properties": {
+                            "current_page": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "from": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "last_page": {
+                                "type": "integer",
+                                "example": 4
+                            },
+                            "path": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/tower-skins"
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "to": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "total": {
+                                "type": "integer",
+                                "example": 200
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "TowerSkinResource": {
+                "description": "A tower skin available in the API",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Celestial Tower"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.75
+                    },
+                    "eventName": {
+                        "type": "string",
+                        "example": "Guild Season Finale",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
             }
         }
     },
@@ -1469,6 +1815,10 @@
         {
             "name": "Tiers",
             "description": "CRUD & restore operations for tier lookup values"
+        },
+        {
+            "name": "Tower Skins",
+            "description": "Manage available tower skins"
         }
     ]
 }

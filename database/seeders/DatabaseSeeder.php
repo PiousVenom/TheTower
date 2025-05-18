@@ -20,6 +20,11 @@ class DatabaseSeeder extends Seeder
             BonusTypeSeeder::class,
             RelicSeeder::class,
             BackgroundSkinSeeder::class,
+            TowerSkinSeeder::class,
+            SongSeeder::class,
+            MenuSeeder::class,
+            ProfileBannerSeeder::class,
+            GuardianSeeder::class,
         ]);
     }
 }
