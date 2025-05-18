@@ -1,17 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('relic_bonuses');
+    }
+
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('relic_bonus', function (Blueprint $table) {
+        Schema::create('relic_bonus', static function (Blueprint $table): void {
             $table->id();   // bigint unsigned PK (keeps life simple for updates)
 
             // ---------- Foreign keys ----------
@@ -34,13 +43,5 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('relic_bonuses');
     }
 };

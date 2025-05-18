@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Requests\StoreRelicRequest;
-use App\Http\Requests\UpdateRelicRequest;
-use App\Models\Relic;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreBonusTypeRequest;
+use App\Http\Requests\UpdateBonusTypeRequest;
+use App\Models\BonusType;
 
-class RelicController extends Controller
+class BonusTypeController extends Controller
 {
     /**
      * Show the form for creating a new resource.
@@ -20,14 +21,14 @@ class RelicController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Relic $relic): void
+    public function destroy(BonusType $bonusType): void
     {
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Relic $relic): void
+    public function edit(BonusType $bonusType): void
     {
     }
 
@@ -41,21 +42,21 @@ class RelicController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Relic $relic): void
+    public function show(BonusType $bonusType): void
     {
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRelicRequest $request): void
+    public function store(StoreBonusTypeRequest $request): void
     {
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRelicRequest $request, Relic $relic): void
+    public function update(UpdateBonusTypeRequest $request, BonusType $bonusType): void
     {
     }
 }

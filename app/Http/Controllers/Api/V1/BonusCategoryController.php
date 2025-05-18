@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Requests\StoreBonusTypeRequest;
-use App\Http\Requests\UpdateBonusTypeRequest;
-use App\Models\BonusType;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreBonusCategoryRequest;
+use App\Http\Requests\UpdateBonusCategoryRequest;
+use App\Models\BonusCategory;
 
-class BonusTypeController extends Controller
+class BonusCategoryController extends Controller
 {
     /**
      * Show the form for creating a new resource.
@@ -20,14 +21,14 @@ class BonusTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BonusType $bonusType): void
+    public function destroy(BonusCategory $bonusCategory): void
     {
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(BonusType $bonusType): void
+    public function edit(BonusCategory $bonusCategory): void
     {
     }
 
@@ -41,21 +42,21 @@ class BonusTypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(BonusType $bonusType): void
+    public function show(BonusCategory $bonusCategory): void
     {
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBonusTypeRequest $request): void
+    public function store(StoreBonusCategoryRequest $request): void
     {
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBonusTypeRequest $request, BonusType $bonusType): void
+    public function update(UpdateBonusCategoryRequest $request, BonusCategory $bonusCategory): void
     {
     }
 }

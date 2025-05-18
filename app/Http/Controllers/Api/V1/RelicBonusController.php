@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Requests\StoreTierRequest;
-use App\Http\Requests\UpdateTierRequest;
-use App\Models\Tier;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreRelicBonusRequest;
+use App\Http\Requests\UpdateRelicBonusRequest;
+use App\Models\RelicBonus;
 
-class TierController extends Controller
+class RelicBonusController extends Controller
 {
     /**
      * Show the form for creating a new resource.
@@ -20,14 +21,14 @@ class TierController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tier $tier): void
+    public function destroy(RelicBonus $relicBonus): void
     {
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Tier $tier): void
+    public function edit(RelicBonus $relicBonus): void
     {
     }
 
@@ -41,21 +42,21 @@ class TierController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Tier $tier): void
+    public function show(RelicBonus $relicBonus): void
     {
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTierRequest $request): void
+    public function store(StoreRelicBonusRequest $request): void
     {
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTierRequest $request, Tier $tier): void
+    public function update(UpdateRelicBonusRequest $request, RelicBonus $relicBonus): void
     {
     }
 }

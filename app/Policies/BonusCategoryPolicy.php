@@ -1,41 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Policies;
 
 use App\Models\BonusCategory;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class BonusCategoryPolicy
 {
     /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, BonusCategory $bonusCategory): bool
-    {
-        return false;
-    }
-
-    /**
      * Determine whether the user can create models.
      */
     public function create(User $user): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can update the model.
-     */
-    public function update(User $user, BonusCategory $bonusCategory): bool
     {
         return false;
     }
@@ -49,6 +26,14 @@ class BonusCategoryPolicy
     }
 
     /**
+     * Determine whether the user can permanently delete the model.
+     */
+    public function forceDelete(User $user, BonusCategory $bonusCategory): bool
+    {
+        return false;
+    }
+
+    /**
      * Determine whether the user can restore the model.
      */
     public function restore(User $user, BonusCategory $bonusCategory): bool
@@ -57,9 +42,25 @@ class BonusCategoryPolicy
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the user can update the model.
      */
-    public function forceDelete(User $user, BonusCategory $bonusCategory): bool
+    public function update(User $user, BonusCategory $bonusCategory): bool
+    {
+        return false;
+    }
+
+    /**
+     * Determine whether the user can view the model.
+     */
+    public function view(User $user, BonusCategory $bonusCategory): bool
+    {
+        return false;
+    }
+
+    /**
+     * Determine whether the user can view any models.
+     */
+    public function viewAny(User $user): bool
     {
         return false;
     }

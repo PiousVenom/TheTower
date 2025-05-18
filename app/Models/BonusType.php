@@ -9,26 +9,25 @@ use Database\Factories\BonusTypeFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
 /**
- * Class BonusType
+ * Class BonusType.
  *
  * Master list of bonus *kinds* that can be applied to relics.
  *
- * @property int    $id
- * @property string $name
- * @property string $unit
+ * @property int         $id
+ * @property string      $name
+ * @property string      $unit
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  *
  * Relationships:
- * @property-read Collection<int,Relic> $relics
- * @property-read BonusCategory|null $category
+ * @property Collection<int,Relic> $relics
+ * @property BonusCategory|null    $category
  *
  * @mixin Eloquent
  *
@@ -61,7 +60,7 @@ class BonusType extends Model
     ];
 
     /* ----------------------------------------------------------------- */
-    /* Relationships                                                     */
+    /* Relationships */
     /* ----------------------------------------------------------------- */
 
     /**
@@ -83,6 +82,7 @@ class BonusType extends Model
     {
         return $this->belongsToMany(
             Relic::class,
-            'relic_bonus');
+            'relic_bonus'
+        );
     }
 }

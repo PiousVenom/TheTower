@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
@@ -12,22 +14,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
 /**
- * Class RelicBonus
+ * Class RelicBonus.
  *
  * Pivot model that links a Relic to exactly one BonusType and stores the
  * **value** of that bonus for the relic.
  *
- *
- * @property int           $id
- * @property int           $relic_id
- * @property int           $bonus_type_id
- * @property string        $value
+ * @property int         $id
+ * @property int         $relic_id
+ * @property int         $bonus_type_id
+ * @property string      $value
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
  * Relationships:
- * @property-read Relic $relic
- * @property-read BonusType $bonusType
+ * @property Relic     $relic
+ * @property BonusType $bonusType
  *
  * @mixin Eloquent
  *
@@ -45,11 +46,14 @@ class RelicBonus extends Pivot
     use SoftDeletes;
 
     /**
-     * Table name override because this is a pivot.
+     * Casts.
      *
-     * @var string
+     * @var array<string,string>
      */
-    protected $table = 'relic_bonus';
+    protected $casts = [
+        // four‑decimal precision to match migration
+        'value' => 'decimal:4',
+    ];
 
     /**
      * Mass‑assignable columns.
@@ -63,27 +67,11 @@ class RelicBonus extends Pivot
     ];
 
     /**
-     * Casts.
+     * Table name override because this is a pivot.
      *
-     * @var array<string,string>
+     * @var string
      */
-    protected $casts = [
-        // four‑decimal precision to match migration
-        'value' => 'decimal:4',
-    ];
-
-    /* ----------------------------------------------------------------- */
-    /* Relationships                                                     */
-    /* ----------------------------------------------------------------- */
-
-    /**
-     * The relic that owns this bonus.
-     * @return BelongsTo<Relic, $this>
-     */
-    public function relic(): BelongsTo
-    {
-        return $this->belongsTo(Relic::class);
-    }
+    protected $table = 'relic_bonus';
 
     /**
      * The type (kind) of bonus applied.
@@ -93,5 +81,19 @@ class RelicBonus extends Pivot
     public function bonusType(): BelongsTo
     {
         return $this->belongsTo(BonusType::class);
+    }
+
+    /* ----------------------------------------------------------------- */
+    /* Relationships */
+    /* ----------------------------------------------------------------- */
+
+    /**
+     * The relic that owns this bonus.
+     *
+     * @return BelongsTo<Relic, $this>
+     */
+    public function relic(): BelongsTo
+    {
+        return $this->belongsTo(Relic::class);
     }
 }

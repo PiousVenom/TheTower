@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Tier
+ * Class Tier.
  *
  * Lookup model for relic tiers (rarities).
  *
@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $name
  *
  * Relationships:
- * @property-read Collection<int,Relic> $relics
+ * @property Collection<int,Relic> $relics
  *
  * @mixin Eloquent
  *
@@ -54,7 +54,7 @@ class Tier extends Model
     ];
 
     /* ----------------------------------------------------------------- */
-    /* Relationships                                                     */
+    /* Relationships */
     /* ----------------------------------------------------------------- */
 
     /**

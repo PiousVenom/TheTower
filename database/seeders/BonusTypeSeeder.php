@@ -23,7 +23,7 @@ class BonusTypeSeeder extends Seeder
             'Defense',
             'Utility',
             'Miscellaneous',
-        ])->mapWithKeys(fn ($name) => [
+        ])->mapWithKeys(static fn ($name) => [
             $name => BonusCategory::firstOrCreate(['name' => $name])->id,
         ]);
 
@@ -68,7 +68,7 @@ class BonusTypeSeeder extends Seeder
         /* -------------------------------------------------------------
          | 3. Sort alphabetically and seed
          * -----------------------------------------------------------*/
-        usort($types, fn ($a, $b) => strcmp($a['name'], $b['name']));
+        usort($types, static fn ($a, $b) => strcmp($a['name'], $b['name']));
 
         foreach ($types as $type) {
             BonusType::factory()->create($type);

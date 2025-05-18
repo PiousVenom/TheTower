@@ -6,17 +6,17 @@ namespace App\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Database\Factories\RelicFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
 /**
- * Class Relic
+ * Class Relic.
  *
  * Represents a unique relic that players can own or discover.
  * A relic belongs to a single Tier and (currently) carries exactly one bonus
@@ -25,18 +25,18 @@ use Illuminate\Support\Collection;
  * still allowing the schema to evolve to many‑to‑many later with a single
  * migration that drops that unique key.
  *
- * @property int $id
- * @property string $name
- * @property int $tier_id
+ * @property int         $id
+ * @property string      $name
+ * @property int         $tier_id
  * @property string|null $unlock_condition
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
  *
  * Relationships:
- * @property-read Tier $tier
- * @property-read Collection<int,BonusType> $bonuses
- * @property-read BonusType|null $bonus (dynamic accessor)
+ * @property Tier                      $tier
+ * @property Collection<int,BonusType> $bonuses
+ * @property BonusType|null            $bonus   (dynamic accessor)
  *
  * @mixin Eloquent
  *
@@ -67,18 +67,12 @@ class Relic extends Model
         'unlock_condition',
     ];
 
-    /* ----------------------------------------------------------------- */
-    /* Relationships                                                     */
-    /* ----------------------------------------------------------------- */
-
     /**
-     * Tier to which this relic belongs.
-     *
-     * @return BelongsTo<Tier, $this>
+     * Convenience accessor for the *single* bonus a relic has today.
      */
-    public function tier(): BelongsTo
+    public function bonus(): ?BonusType
     {
-        return $this->belongsTo(Tier::class);
+        return $this->bonuses()->first();
     }
 
     /**
@@ -95,12 +89,17 @@ class Relic extends Model
             ->using(RelicBonus::class);
     }
 
+    /* ----------------------------------------------------------------- */
+    /* Relationships */
+    /* ----------------------------------------------------------------- */
+
     /**
-     * Convenience accessor for the *single* bonus a relic has today.
-     * @return BonusType|null
+     * Tier to which this relic belongs.
+     *
+     * @return BelongsTo<Tier, $this>
      */
-    public function bonus(): ?BonusType
+    public function tier(): BelongsTo
     {
-        return $this->bonuses()->first();
+        return $this->belongsTo(Tier::class);
     }
 }

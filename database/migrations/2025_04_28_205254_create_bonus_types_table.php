@@ -29,10 +29,10 @@ return new class extends Migration {
                 ->nullOnDelete();
 
             $table->string('name')->unique();
-            $table->enum('unit',[
-               'percentage',
-               'flat',
-               'seconds'
+            $table->enum('unit', [
+                'percentage',
+                'flat',
+                'seconds',
             ]);
             $table->timestamps();
             $table->softDeletes();
