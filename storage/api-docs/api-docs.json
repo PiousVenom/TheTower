@@ -564,6 +564,20 @@
                 },
                 "type": "object"
             },
+            "BonusCategoryResource": {
+                "description": "Grouping bucket for bonus types (Damage, Defense, Utility, Misc).",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Defense"
+                    }
+                },
+                "type": "object"
+            },
             "BonusTypeCollection": {
                 "description": "Paginated list of bonus types",
                 "properties": {
@@ -638,23 +652,48 @@
                 "type": "object"
             },
             "BonusTypeResource": {
-                "description": "Bonus attached to a relic",
+                "description": "Master definition of a bonus type",
                 "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
                     "name": {
                         "type": "string",
                         "example": "Defense Absolute"
                     },
                     "unit": {
                         "type": "string",
+                        "enum": [
+                            "percentage",
+                            "flat",
+                            "seconds"
+                        ],
                         "example": "percentage"
                     },
-                    "value": {
-                        "type": "number",
-                        "format": "float",
-                        "example": 0.02
+                    "category": {
+                        "$ref": "#/components/schemas/BonusCategoryResource"
                     }
                 },
                 "type": "object"
+            },
+            "RelicBonusResource": {
+                "description": "Bonus as it appears on a relic (includes rolled value)",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/BonusTypeResource"
+                    },
+                    {
+                        "properties": {
+                            "value": {
+                                "type": "number",
+                                "format": "float",
+                                "example": 0.02
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
             },
             "RelicCollection": {
                 "description": "Paginated list of relics",
@@ -752,7 +791,7 @@
                     "bonuses": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/BonusTypeResource"
+                            "$ref": "#/components/schemas/RelicBonusResource"
                         }
                     }
                 },

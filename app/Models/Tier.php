@@ -39,6 +39,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|Tier whereUpdatedAt($value)
  * @method static Builder<static>|Tier withTrashed()
  * @method static Builder<static>|Tier withoutTrashed()
+ * @method static bool                 restore()
+ * @method        bool                 restore()
  *
  * @mixin Eloquent
  */
