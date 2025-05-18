@@ -15,7 +15,7 @@ namespace App\OpenApi\V1;
  *
  *     @OA\Server(
  *         url="/api/v1",
- *         description="Base path for version 1"
+ *         description="Version 1"
  *     )
  * )
  */

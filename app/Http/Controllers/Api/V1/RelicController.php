@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response as Http;
  *     description="CRUD & restore operations for relics"
  * )
  *
- *  Global path prefix comes from routes:  /api/v1
+ *  Global path prefix comes from routes:
  */
 class RelicController extends Controller
 {
@@ -30,7 +30,7 @@ class RelicController extends Controller
      * Delete (soft-delete) a relic.
      *
      * @OA\Delete(
-     *     path="/api/v1/relics/{relic}",
+     *     path="/relics/{relic}",
      *     summary="Soft-delete a relic",
      *     tags={"Relics"},
      *
@@ -64,7 +64,7 @@ class RelicController extends Controller
      * List relics (paginated).
      *
      * @OA\Get(
-     *     path="/api/v1/relics",
+     *     path="/relics",
      *     summary="List relics",
      *     tags={"Relics"},
      *
@@ -97,7 +97,7 @@ class RelicController extends Controller
      * Restore (undelete) a relic.
      *
      * @OA\Patch(
-     *     path="/api/v1/relics/{id}/restore",
+     *     path="/relics/{id}/restore",
      *     summary="Restore a soft-deleted relic",
      *     tags={"Relics"},
      *
@@ -143,7 +143,7 @@ class RelicController extends Controller
      * Show a single relic.
      *
      * @OA\Get(
-     *     path="/api/v1/relics/{relic}",
+     *     path="/relics/{relic}",
      *     summary="Get a relic",
      *     tags={"Relics"},
      *
@@ -174,7 +174,7 @@ class RelicController extends Controller
      * Create a relic.
      *
      * @OA\Post(
-     *     path="/api/v1/relics",
+     *     path="/relics",
      *     summary="Create a relic",
      *     tags={"Relics"},
      *
@@ -217,7 +217,7 @@ class RelicController extends Controller
      * Update a relic.
      *
      * @OA\Patch(
-     *     path="/api/v1/relics/{relic}",
+     *     path="/relics/{relic}",
      *     summary="Update a relic",
      *     tags={"Relics"},
      *

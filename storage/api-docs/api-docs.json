@@ -8,18 +8,18 @@
     "servers": [
         {
             "url": "/api/v1",
-            "description": "Base path for version 1"
+            "description": "Version 1"
         }
     ],
     "paths": {
-        "/api/v1/relics/{relic}": {
+        "/relics/{relic}": {
             "get": {
                 "tags": [
                     "Relics"
                 ],
                 "summary": "Get a relic",
                 "description": "Show a single relic.",
-                "operationId": "2547a759986afb1edd47214fb8af382f",
+                "operationId": "842ce04485b9073c5d3899c4ca0c5ee3",
                 "parameters": [
                     {
                         "name": "relic",
@@ -53,7 +53,7 @@
                 ],
                 "summary": "Soft-delete a relic",
                 "description": "Delete (soft-delete) a relic.",
-                "operationId": "bccf104fdd2ecb07451a0e2d3df9acc6",
+                "operationId": "22c00018e33b57698893075e60200bcc",
                 "parameters": [
                     {
                         "name": "relic",
@@ -81,7 +81,7 @@
                 ],
                 "summary": "Update a relic",
                 "description": "Update a relic.",
-                "operationId": "0b1a2a166c1bf827972e418688b9a732",
+                "operationId": "af3cbe187885adf3d0353f6a99ba0d88",
                 "parameters": [
                     {
                         "name": "relic",
@@ -122,14 +122,14 @@
                 }
             }
         },
-        "/api/v1/relics": {
+        "/relics": {
             "get": {
                 "tags": [
                     "Relics"
                 ],
                 "summary": "List relics",
                 "description": "List relics (paginated).",
-                "operationId": "93a862624aa58f80e59a25071500206a",
+                "operationId": "3d53e5fa003de3e936f580caa95c6414",
                 "parameters": [
                     {
                         "name": "page",
@@ -169,7 +169,7 @@
                 ],
                 "summary": "Create a relic",
                 "description": "Create a relic.",
-                "operationId": "7f7c790062cb2f2530b6c1799fd05cac",
+                "operationId": "a83793aa596e72a5949e794ad5e9b10b",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -197,14 +197,14 @@
                 }
             }
         },
-        "/api/v1/relics/{id}/restore": {
+        "/relics/{id}/restore": {
             "patch": {
                 "tags": [
                     "Relics"
                 ],
                 "summary": "Restore a soft-deleted relic",
                 "description": "Restore (undelete) a relic.",
-                "operationId": "cc31bf8094f5dcd0979249be923f1040",
+                "operationId": "7d5a0e0f118a602d8f10e6ebaa971768",
                 "parameters": [
                     {
                         "name": "id",
