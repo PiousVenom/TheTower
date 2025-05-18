@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Response as Http;
 
 /**
- *  Relic endpoints  (API v1).
+ *  Relic endpoints (API v1).
  *
  * @OA\Tag(
  *     name="Relics",
