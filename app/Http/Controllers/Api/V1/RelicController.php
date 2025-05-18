@@ -8,19 +8,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\V1\RelicCollection;
 use App\Http\Resources\Api\V1\RelicResource;
 use App\Models\Relic;
-use App\Traits\RestoreSoftDeletes;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response as Http;
 
 class RelicController extends Controller
 {
-    use RestoreSoftDeletes;
-
-    protected string $model    = Relic::class;
-    protected string $resource = RelicResource::class;
-
     /* ---------------------------------------------------------------------
      |  Destroy  –  DELETE /api/v1/relics/{relic}
      |---------------------------------------------------------------------*/
@@ -39,6 +34,24 @@ class RelicController extends Controller
         return new RelicCollection(
             Relic::with(['tier', 'bonuses'])->paginate(50)
         );
+    }
+
+    /* ---------------------------------------------------------------------
+     |  Restore  –  PATCH /api/v1/relics/{id}/restore
+     |---------------------------------------------------------------------*/
+    public function restore(int|string $id): JsonResponse
+    {
+        $relic = Relic::withTrashed()->findOrFail($id);
+
+        if (!$relic->trashed()) {
+            return response()->json([
+                'message' => 'Relic is not deleted.',
+            ], Http::HTTP_CONFLICT);
+        }
+
+        $relic->restore();
+
+        return (new RelicResource($relic->refresh()->load(['tier', 'bonuses'])))->response();
     }
 
     /* ---------------------------------------------------------------------
