@@ -7,56 +7,208 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\StoreSongRequest;
 use App\Http\Requests\Api\V1\UpdateSongRequest;
+use App\Http\Resources\Api\V1\SongCollection;
+use App\Http\Resources\Api\V1\SongResource;
 use App\Models\Song;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @OA\Tag(
+ *     name="Songs",
+ *     description="Manage available songs"
+ * )
+ */
 class SongController extends Controller
 {
     /**
-     * Show the form for creating a new resource.
+     * Soft-delete a song.
+     *
+     * @OA\Delete(
+     *     path="/songs/{id}",
+     *     summary="Delete song",
+     *     tags={"Songs"},
+     *
+     *     @OA\Parameter(
+     *         name="id", in="path", required=true,
+     *
+     *         @OA\Schema(type="integer", example=1)
+     *     ),
+     *
+     *     @OA\Response(response=204, description="Deleted"),
+     *     @OA\Response(response=404, description="Not found")
+     * )
      */
-    public function create(): void
+    public function destroy(Song $song): Response
     {
+        $song->delete();
+
+        return response()->noContent();
     }
 
     /**
-     * Remove the specified resource from storage.
+     * List songs (paginated).
+     *
+     * @OA\Get(
+     *     path="/songs",
+     *     summary="List songs",
+     *     tags={"Songs"},
+     *
+     *     @OA\Response(
+     *         response=200,
+     *         description="Paginated list of songs",
+     *
+     *         @OA\JsonContent(ref="#/components/schemas/SongCollection")
+     *     )
+     * )
      */
-    public function destroy(Song $song): void
+    public function index(): SongCollection
     {
+        return new SongCollection(Song::paginate(50));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Restore a soft-deleted song.
+     *
+     * @OA\Patch(
+     *     path="/songs/{id}/restore",
+     *     summary="Restore song",
+     *     tags={"Songs"},
+     *
+     *     @OA\Parameter(
+     *         name="id", in="path", required=true,
+     *
+     *         @OA\Schema(type="integer", example=1)
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=200,
+     *         description="Restored song",
+     *
+     *         @OA\JsonContent(ref="#/components/schemas/SongResource")
+     *     ),
+     *
+     *     @OA\Response(response=409, description="Song is not deleted"),
+     *     @OA\Response(response=404, description="Not found")
+     * )
      */
-    public function edit(Song $song): void
+    public function restore(int|string $id): JsonResponse
     {
+        $song = Song::withTrashed()->findOrFail($id);
+
+        if (!$song->trashed()) {
+            return response()->json(
+                ['message' => 'Song is not deleted.'],
+                Response::HTTP_CONFLICT
+            );
+        }
+
+        $song->restore();
+
+        return response()->json(
+            new SongResource($song)
+        );
     }
 
     /**
-     * Display a listing of the resource.
+     * Retrieve a single song.
+     *
+     * @OA\Get(
+     *     path="/songs/{id}",
+     *     summary="Get a song",
+     *     tags={"Songs"},
+     *
+     *     @OA\Parameter(
+     *         name="id", in="path", required=true,
+     *
+     *         @OA\Schema(type="integer", example=1)
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=200,
+     *         description="Song detail",
+     *
+     *         @OA\JsonContent(ref="#/components/schemas/SongResource")
+     *     ),
+     *
+     *     @OA\Response(response=404, description="Not found")
+     * )
      */
-    public function index(): void
+    public function show(Song $song): SongResource
     {
+        return new SongResource($song);
     }
 
     /**
-     * Display the specified resource.
+     * Create a new song.
+     *
+     * @OA\Post(
+     *     path="/songs",
+     *     summary="Create song",
+     *     tags={"Songs"},
+     *
+     *     @OA\RequestBody(
+     *         required=true,
+     *
+     *         @OA\JsonContent(ref="#/components/schemas/StoreSongRequest")
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=201,
+     *         description="Created",
+     *
+     *         @OA\JsonContent(ref="#/components/schemas/SongResource")
+     *     ),
+     *
+     *     @OA\Response(response=422, description="Validation error")
+     * )
      */
-    public function show(Song $song): void
+    public function store(StoreSongRequest $request): JsonResponse
     {
+        $song = Song::create($request->validated());
+
+        return response()->json(
+            new SongResource($song),
+            Response::HTTP_CREATED
+        );
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Update an existing song.
+     *
+     * @OA\Patch(
+     *     path="/songs/{id}",
+     *     summary="Update song",
+     *     tags={"Songs"},
+     *
+     *     @OA\Parameter(
+     *         name="id", in="path", required=true,
+     *
+     *         @OA\Schema(type="integer", example=1)
+     *     ),
+     *
+     *     @OA\RequestBody(
+     *
+     *         @OA\JsonContent(ref="#/components/schemas/UpdateSongRequest")
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=200,
+     *         description="Updated song",
+     *
+     *         @OA\JsonContent(ref="#/components/schemas/SongResource")
+     *     ),
+     *
+     *     @OA\Response(response=422, description="Validation error"),
+     *     @OA\Response(response=404, description="Not found")
+     * )
      */
-    public function store(StoreSongRequest $request): void
+    public function update(UpdateSongRequest $request, Song $song): JsonResponse
     {
-    }
+        $song->update($request->validated());
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateSongRequest $request, Song $song): void
-    {
+        return response()->json(
+            new SongResource($song->refresh())
+        );
     }
 }

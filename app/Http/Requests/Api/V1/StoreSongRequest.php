@@ -6,24 +6,50 @@ namespace App\Http\Requests\Api\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *     schema="StoreSongRequest",
+ *     required={"name", "value"},
+ *     description="Payload sent when creating a new Song",
+ *
+ *     @OA\Property(
+ *         property="name",
+ *         type="string",
+ *         maxLength=191,
+ *         example="Epic Battle Theme"
+ *     ),
+ *     @OA\Property(
+ *         property="value",
+ *         type="number",
+ *         format="float",
+ *         example=0.006
+ *     )
+ * )
+ */
 class StoreSongRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
+    /** @return array<string,string> */
+    public function messages(): array
+    {
+        return [
+            'name.required'  => 'A song name is required.',
+            'name.unique'    => 'That song name is already taken.',
+            'value.required' => 'A numeric value is required.',
+            'value.numeric'  => 'The value must be a number.',
+        ];
+    }
+
+    /** @return array<string,mixed> */
     public function rules(): array
     {
         return [
+            'name'  => ['required', 'string', 'max:191', 'unique:songs,name'],
+            'value' => ['required', 'numeric', 'between:0,9999.9999'],
         ];
     }
 }
