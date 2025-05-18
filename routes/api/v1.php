@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V1\BonusTypeController;
 use App\Http\Controllers\Api\V1\RelicBonusController;
 use App\Http\Controllers\Api\V1\RelicController;
 use App\Http\Controllers\Api\V1\TierController;
+use App\Http\Controllers\Api\V1\TowerSkinController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')
@@ -19,6 +20,7 @@ Route::prefix('v1')
         Route::apiResource('bonus-categories', BonusCategoryController::class);
         Route::apiResource('bonus-types', BonusTypeController::class);
         Route::apiResource('background-skins', BackgroundSkinController::class);
+        Route::apiResource('tower-skins', TowerSkinController::class);
 
         // Main resource
         Route::apiResource('relics', RelicController::class);
