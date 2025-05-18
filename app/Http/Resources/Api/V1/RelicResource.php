@@ -26,7 +26,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *         property="bonuses",
  *         type="array",
  *
- *         @OA\Items(ref="#/components/schemas/BonusTypeResource")
+ *         @OA\Items(ref="#/components/schemas/RelicBonusResource")
  *     )
  * )
  *
@@ -49,7 +49,7 @@ class RelicResource extends JsonResource
             'name'            => $this->name,
             'tier'            => $this->tier->name,
             'unlockCondition' => $this->unlock_condition,
-            'bonuses'         => BonusTypeResource::collection($this->bonuses),
+            'bonuses'         => RelicBonusResource::collection($this->bonuses->load('category')),
         ];
     }
 }

@@ -45,6 +45,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|BonusType whereUpdatedAt($value)
  * @method static Builder<static>|BonusType withTrashed()
  * @method static Builder<static>|BonusType withoutTrashed()
+ * @method static bool                      restore()
+ * @method        bool                      restore()
  *
  * @mixin Eloquent
  */

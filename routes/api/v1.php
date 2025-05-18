@@ -25,7 +25,7 @@ Route::prefix('v1')
         Route::apiResource('relics.bonus', RelicBonusController::class)
             ->shallow(); // gives routes like DELETE /relic-bonus/{id}
 
-        // routes/api/v1.php  (add just below the relic apiResource)
+        // routes/api/v1.php (add just below the relic apiResource)
         Route::patch('relics/{relic}/restore',          // PATCH /api/v1/relics/1/restore
             [RelicController::class, 'restore'])
             ->withTrashed()                           // ← allow model binding on trashed rows
