@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreRelicRequest;
+use App\Http\Requests\UpdateRelicRequest;
 use App\Http\Resources\Api\V1\RelicCollection;
 use App\Http\Resources\Api\V1\RelicResource;
 use App\Models\Relic;
@@ -14,6 +16,15 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Response as Http;
 
+/**
+ * @property array{
+ *     name: string,
+ *     tier_id: int,
+ *     bonus_type_id: int,
+ *     value: float,
+ *     unlock_condition: ?string
+ * } $validated
+ */
 class RelicController extends Controller
 {
     /* ---------------------------------------------------------------------
@@ -39,8 +50,9 @@ class RelicController extends Controller
     /* ---------------------------------------------------------------------
      |  Restore  –  PATCH /api/v1/relics/{id}/restore
      |---------------------------------------------------------------------*/
-    public function restore(int|string $id): JsonResponse
+    public function restore(int|string $id): RelicResource|JsonResponse
     {
+        /** @var Relic $relic */
         $relic = Relic::withTrashed()->findOrFail($id);
 
         if (!$relic->trashed()) {
@@ -51,7 +63,9 @@ class RelicController extends Controller
 
         $relic->restore();
 
-        return (new RelicResource($relic->refresh()->load(['tier', 'bonuses'])))->response();
+        return new RelicResource(
+            $relic->load(['tier', 'bonuses'])
+        );
     }
 
     /* ---------------------------------------------------------------------
@@ -67,15 +81,9 @@ class RelicController extends Controller
     /* ---------------------------------------------------------------------
      |  Store  –  POST /api/v1/relics
      |---------------------------------------------------------------------*/
-    public function store(Request $request): JsonResponse
+    public function store(StoreRelicRequest $request): JsonResponse
     {
-        $validated = $request->validate([
-            'name'             => ['required', 'string', 'max:191', 'unique:relics,name'],
-            'tier_id'          => ['required', 'exists:tiers,id'],
-            'bonus_type_id'    => ['required', 'exists:bonus_types,id'],
-            'value'            => ['required', 'numeric', 'between:0,9999.9999'],
-            'unlock_condition' => ['nullable', 'string'],
-        ]);
+        $validated = $request->validated();
 
         // Create Relic
         $relic = Relic::create([
@@ -95,29 +103,32 @@ class RelicController extends Controller
     /* ---------------------------------------------------------------------
      |  Update  –  PUT/PATCH /api/v1/relics/{relic}
      |---------------------------------------------------------------------*/
-    public function update(Request $request, Relic $relic): JsonResponse
+    public function update(UpdateRelicRequest $request, Relic $relic): JsonResponse
     {
-        $validated = $request->validate([
-            'name'             => ['sometimes', 'string', 'max:191', Rule::unique('relics', 'name')->ignore($relic->id)],
-            'tier_id'          => ['sometimes', 'exists:tiers,id'],
-            'bonus_type_id'    => ['sometimes', 'exists:bonus_types,id'],
-            'value'            => ['sometimes', 'numeric', 'between:0,9999.9999'],
-            'unlock_condition' => ['nullable', 'string'],
-        ]);
+        $validated = $request->validated();
 
         // Update relic core fields
-        $relic->update($request->only(['name', 'tier_id', 'unlock_condition']));
+        $relic->update(array_filter([
+            'name'             => $validated['name'] ?? null,
+            'tier_id'          => $validated['tier_id'] ?? null,
+            'unlock_condition' => $validated['unlock_condition'] ?? null,
+        ], static fn ($v) => $v !== null));
 
         // Update bonus pivot if provided
         if ($request->filled('bonus_type_id') || $request->filled('value')) {
             // Detach old
             $relic->bonuses()->detach();
-            // Attach new / same type with possibly new value
-            $relic->bonuses()->attach([
-                $validated['bonus_type_id'] ?? $relic->bonuses()->first()->id => [
-                    'value' => $validated['value'] ?? $relic->bonus()?->pivot->value,
-                ],
-            ]);
+
+            // Get the bonus type ID and value
+            $bonusTypeId = $validated['bonus_type_id'] ?? $relic->bonuses()->first()?->id;
+            $bonusValue = $validated['value'] ?? $relic->bonuses()->first()?->pivot?->value;
+
+            if ($bonusTypeId !== null && $bonusValue !== null) {
+                // Attach new / same type with possibly new value
+                $relic->bonuses()->attach([
+                    $bonusTypeId => ['value' => $bonusValue],
+                ]);
+            }
         }
 
         return response()->json($relic->refresh()->load(['tier', 'bonuses']));

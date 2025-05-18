@@ -8,22 +8,39 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRelicRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true; // add policies/gates if needed
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Validation rules for creating a relic.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, mixed>
      */
     public function rules(): array
     {
         return [
+            'name'             => ['required', 'string', 'max:191', 'unique:relics,name'],
+            'tier_id'          => ['required', 'exists:tiers,id'],
+            'bonus_type_id'    => ['required', 'exists:bonus_types,id'],
+            'value'            => ['required', 'numeric', 'between:0,9999.9999'],
+            'unlock_condition' => ['nullable', 'string'],
+        ];
+    }
+
+    /**
+     * Custom error messages for required fields.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'name.required'          => 'A relic name is required.',
+            'tier_id.required'       => 'Please select a tier for the relic.',
+            'bonus_type_id.required' => 'Please choose a bonus type for the relic.',
+            'value.required'         => 'A bonus value (numeric) is required.',
         ];
     }
 }

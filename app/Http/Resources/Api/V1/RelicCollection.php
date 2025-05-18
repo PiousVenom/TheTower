@@ -9,12 +9,15 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class RelicCollection extends ResourceCollection
 {
-    public $collects = RelicResource::class;   // each item uses RelicResource
+    public $collects = RelicResource::class;
 
-    /** @return array<string,mixed> */
+    /**
+     * @return array<string,mixed>
+     */
     public function toArray(Request $request): array
     {
-        // Parent puts items in "data"; we can pass that straight through
-        return parent::toArray($request);
+        /** @var array<string,mixed> $array */
+        $array = parent::toArray($request);
+        return $array; // cast narrows the return type for Larastan
     }
 }
