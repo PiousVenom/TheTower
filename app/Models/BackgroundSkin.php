@@ -18,6 +18,7 @@ use Illuminate\Support\Carbon;
  * @property int         $id
  * @property string      $name
  * @property float       $value
+ * @property string      $eventName
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
@@ -45,8 +46,26 @@ class BackgroundSkin extends Model
     use HasFactory;
     use SoftDeletes;
 
+    // Append the camelCase virtual attribute
+    protected $appends = ['eventName'];
+
     protected $fillable = [
         'name',
         'value',
+        'event_name',
     ];
+
+    // Hide the raw snake_case column when serializing the model
+    protected $hidden = ['event_name'];
+
+    /**
+     * Accessor for the camelCase JSON key.
+     */
+    public function getEventNameAttribute(): string
+    {
+        /** @var string $eventName */
+        $eventName = $this->attributes['event_name'];
+
+        return $eventName;
+    }
 }

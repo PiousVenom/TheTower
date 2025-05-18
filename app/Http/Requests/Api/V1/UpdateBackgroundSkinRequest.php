@@ -17,13 +17,19 @@ use Illuminate\Validation\Rule;
  *         property="name",
  *         type="string",
  *         maxLength=191,
- *         example="Sunset Glow"
+ *         example="Interstellar"
  *     ),
  *     @OA\Property(
  *         property="value",
  *         type="number",
  *         format="float",
  *         example=0.7500
+ *     ),
+ *     @OA\Property(
+ *         property="eventName",
+ *         type="string",
+ *         maxLength=191,
+ *         example="Interstellar"
  *     )
  * )
  */

@@ -22,7 +22,11 @@ return new class extends Migration {
     {
         Schema::create('background_skins', static function (Blueprint $table): void {
             $table->id();
+            $table->string('name')->unique();
+            $table->decimal('value', 10, 4);
+            $table->string('event_name');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 };

@@ -954,12 +954,17 @@
                     "name": {
                         "type": "string",
                         "maxLength": 191,
-                        "example": "Sunset Glow"
+                        "example": "Interstellar"
                     },
                     "value": {
                         "type": "number",
                         "format": "float",
                         "example": 0.75
+                    },
+                    "eventName": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Interstellar"
                     }
                 },
                 "type": "object"
@@ -1112,12 +1117,16 @@
                     },
                     "name": {
                         "type": "string",
-                        "example": "Sunset"
+                        "example": "Intersteller"
                     },
                     "value": {
                         "type": "number",
                         "format": "float",
                         "example": 0.5
+                    },
+                    "eventName": {
+                        "type": "string",
+                        "example": "Intersteller"
                     }
                 },
                 "type": "object"
