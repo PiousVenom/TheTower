@@ -1,0 +1,439 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "The Tower API (v1)",
+        "description": "Endpoints for various resources in The Tower.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "/api/v1",
+            "description": "Base path for version 1"
+        }
+    ],
+    "paths": {
+        "/api/v1/relics/{relic}": {
+            "get": {
+                "tags": [
+                    "Relics"
+                ],
+                "summary": "Get a relic",
+                "description": "Show a single relic.",
+                "operationId": "2547a759986afb1edd47214fb8af382f",
+                "parameters": [
+                    {
+                        "name": "relic",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Relic detail",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RelicResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Relics"
+                ],
+                "summary": "Soft-delete a relic",
+                "description": "Delete (soft-delete) a relic.",
+                "operationId": "bccf104fdd2ecb07451a0e2d3df9acc6",
+                "parameters": [
+                    {
+                        "name": "relic",
+                        "in": "path",
+                        "description": "Relic ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted (no content)"
+                    },
+                    "404": {
+                        "description": "Relic not found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Relics"
+                ],
+                "summary": "Update a relic",
+                "description": "Update a relic.",
+                "operationId": "0b1a2a166c1bf827972e418688b9a732",
+                "parameters": [
+                    {
+                        "name": "relic",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateRelicRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated relic",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RelicResource"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/relics": {
+            "get": {
+                "tags": [
+                    "Relics"
+                ],
+                "summary": "List relics",
+                "description": "List relics (paginated).",
+                "operationId": "93a862624aa58f80e59a25071500206a",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Items per page (default 50)",
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100,
+                            "minimum": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Paginated list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RelicCollection"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Relics"
+                ],
+                "summary": "Create a relic",
+                "description": "Create a relic.",
+                "operationId": "7f7c790062cb2f2530b6c1799fd05cac",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreRelicRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RelicResource"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/v1/relics/{id}/restore": {
+            "patch": {
+                "tags": [
+                    "Relics"
+                ],
+                "summary": "Restore a soft-deleted relic",
+                "description": "Restore (undelete) a relic.",
+                "operationId": "cc31bf8094f5dcd0979249be923f1040",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Relic ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Restored relic",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RelicResource"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Relic is not deleted"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "StoreRelicRequest": {
+                "required": [
+                    "name",
+                    "tier_id",
+                    "bonus_type_id",
+                    "value"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "No Spoon"
+                    },
+                    "tier_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "example": 2
+                    },
+                    "bonus_type_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "example": 9
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.02
+                    },
+                    "unlock_condition": {
+                        "type": "string",
+                        "example": "Earn 350 medals Matrix event",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateRelicRequest": {
+                "description": "Any subset of fields may be supplied to update the relic.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "No Spoon Mk II"
+                    },
+                    "tier_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "example": 3
+                    },
+                    "bonus_type_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "example": 12
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.05
+                    },
+                    "unlock_condition": {
+                        "type": "string",
+                        "example": "Earn 700 medals Matrix event",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "BonusTypeResource": {
+                "description": "Bonus attached to a relic",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Defense Absolute"
+                    },
+                    "unit": {
+                        "type": "string",
+                        "example": "percentage"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.02
+                    }
+                },
+                "type": "object"
+            },
+            "RelicCollection": {
+                "description": "Paginated list of relics",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/RelicResource"
+                        }
+                    },
+                    "links": {
+                        "properties": {
+                            "first": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/relics?page=1"
+                            },
+                            "last": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/relics?page=5"
+                            },
+                            "prev": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": null,
+                                "nullable": true
+                            },
+                            "next": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/relics?page=2",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "meta": {
+                        "properties": {
+                            "current_page": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "from": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "last_page": {
+                                "type": "integer",
+                                "example": 5
+                            },
+                            "path": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/relics"
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "to": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "total": {
+                                "type": "integer",
+                                "example": 236
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "RelicResource": {
+                "description": "Single relic payload",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "No Spoon"
+                    },
+                    "tier": {
+                        "type": "string",
+                        "example": "Rare"
+                    },
+                    "unlockCondition": {
+                        "type": "string",
+                        "example": "Earn 350 medals Matrix event",
+                        "nullable": true
+                    },
+                    "bonuses": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/BonusTypeResource"
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Relics",
+            "description": "CRUD & restore operations for relics"
+        }
+    ]
+}

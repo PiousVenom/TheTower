@@ -6,6 +6,19 @@ namespace App\Http\Requests\Api\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *     schema="StoreRelicRequest",
+ *     required={"name", "tier_id", "bonus_type_id", "value"},
+ *
+ *     @OA\Property(property="name",           type="string",  maxLength=191, example="No Spoon"),
+ *     @OA\Property(property="tier_id",        type="integer", minimum=1,     example=2),
+ *     @OA\Property(property="bonus_type_id",  type="integer", minimum=1,     example=9),
+ *     @OA\Property(property="value",          type="number",  format="float", example=0.02),
+ *     @OA\Property(property="unlock_condition", type="string", nullable=true,
+ *     example="Earn 350 medals Matrix event")
+ * )
+ */
 class StoreRelicRequest extends FormRequest
 {
     public function authorize(): bool

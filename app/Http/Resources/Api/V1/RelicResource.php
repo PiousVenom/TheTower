@@ -9,7 +9,28 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * Relic single‑item resource (no "data" wrapper).
+ * @OA\Schema(
+ *     schema="RelicResource",
+ *     description="Single relic payload",
+ *
+ *     @OA\Property(property="id",   type="integer", example=1),
+ *     @OA\Property(property="name", type="string",  example="No Spoon"),
+ *     @OA\Property(property="tier", type="string",  example="Rare"),
+ *     @OA\Property(
+ *         property="unlockCondition",
+ *         type="string",
+ *         nullable=true,
+ *         example="Earn 350 medals Matrix event"
+ *     ),
+ *     @OA\Property(
+ *         property="bonuses",
+ *         type="array",
+ *
+ *         @OA\Items(ref="#/components/schemas/BonusTypeResource")
+ *     )
+ * )
+ *
+ * Relic single-item resource (no "data" wrapper).
  *
  * @mixin Relic
  */

@@ -8,6 +8,19 @@ use App\Models\Relic;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
+/**
+ * @OA\Schema(
+ *     schema="UpdateRelicRequest",
+ *     description="Any subset of fields may be supplied to update the relic.",
+ *
+ *     @OA\Property(property="name",           type="string",  maxLength=191, example="No Spoon Mk II"),
+ *     @OA\Property(property="tier_id",        type="integer", minimum=1,     example=3),
+ *     @OA\Property(property="bonus_type_id",  type="integer", minimum=1,     example=12),
+ *     @OA\Property(property="value",          type="number",  format="float", example=0.05),
+ *     @OA\Property(property="unlock_condition", type="string", nullable=true,
+ *     example="Earn 700 medals Matrix event")
+ * )
+ */
 class UpdateRelicRequest extends FormRequest
 {
     public function authorize(): bool

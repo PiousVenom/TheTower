@@ -15,19 +15,44 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Response as Http;
 
 /**
- * @property array{
- *     name: string,
- *     tier_id: int,
- *     bonus_type_id: int,
- *     value: float,
- *     unlock_condition: ?string
- * } $validated
+ *  Relic endpoints  (API v1).
+ *
+ * @OA\Tag(
+ *     name="Relics",
+ *     description="CRUD & restore operations for relics"
+ * )
+ *
+ *  Global path prefix comes from routes:  /api/v1
  */
 class RelicController extends Controller
 {
-    /* ---------------------------------------------------------------------
-     |  Destroy  –  DELETE /api/v1/relics/{relic}
-     |---------------------------------------------------------------------*/
+    /**
+     * Delete (soft-delete) a relic.
+     *
+     * @OA\Delete(
+     *     path="/api/v1/relics/{relic}",
+     *     summary="Soft-delete a relic",
+     *     tags={"Relics"},
+     *
+     *     @OA\Parameter(
+     *         name="relic",
+     *         in="path",
+     *         required=true,
+     *         description="Relic ID",
+     *
+     *         @OA\Schema(type="integer", example=1)
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=204,
+     *         description="Deleted (no content)"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Relic not found"
+     *     )
+     * )
+     */
     public function destroy(Relic $relic): Response
     {
         $relic->delete();
@@ -35,9 +60,32 @@ class RelicController extends Controller
         return response()->noContent();
     }
 
-    /* ---------------------------------------------------------------------
-     |  Index  –  GET /api/v1/relics
-     |---------------------------------------------------------------------*/
+    /**
+     * List relics (paginated).
+     *
+     * @OA\Get(
+     *     path="/api/v1/relics",
+     *     summary="List relics",
+     *     tags={"Relics"},
+     *
+     *     @OA\Parameter(
+     *         name="page", in="query", @OA\Schema(type="integer", minimum=1)
+     *     ),
+     *     @OA\Parameter(
+     *         name="per_page", in="query",
+     *         description="Items per page (default 50)",
+     *
+     *         @OA\Schema(type="integer", minimum=1, maximum=100)
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=200,
+     *         description="Paginated list",
+     *
+     *         @OA\JsonContent(ref="#/components/schemas/RelicCollection")
+     *     )
+     * )
+     */
     public function index(): RelicCollection
     {
         return new RelicCollection(
@@ -45,9 +93,34 @@ class RelicController extends Controller
         );
     }
 
-    /* ---------------------------------------------------------------------
-     |  Restore  –  PATCH /api/v1/relics/{id}/restore
-     |---------------------------------------------------------------------*/
+    /**
+     * Restore (undelete) a relic.
+     *
+     * @OA\Patch(
+     *     path="/api/v1/relics/{id}/restore",
+     *     summary="Restore a soft-deleted relic",
+     *     tags={"Relics"},
+     *
+     *     @OA\Parameter(
+     *         name="id", in="path", required=true, description="Relic ID",
+     *
+     *         @OA\Schema(type="integer", example=1)
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=200,
+     *         description="Restored relic",
+     *
+     *         @OA\JsonContent(ref="#/components/schemas/RelicResource")
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=409,
+     *         description="Relic is not deleted"
+     *     ),
+     *     @OA\Response(response=404, description="Not found")
+     * )
+     */
     public function restore(int|string $id): RelicResource|JsonResponse
     {
         /** @var Relic $relic */
@@ -66,9 +139,30 @@ class RelicController extends Controller
         );
     }
 
-    /* ---------------------------------------------------------------------
-     |  Show  –  GET /api/v1/relics/{relic}
-     |---------------------------------------------------------------------*/
+    /**
+     * Show a single relic.
+     *
+     * @OA\Get(
+     *     path="/api/v1/relics/{relic}",
+     *     summary="Get a relic",
+     *     tags={"Relics"},
+     *
+     *     @OA\Parameter(
+     *         name="relic", in="path", required=true,
+     *
+     *         @OA\Schema(type="integer", example=1)
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=200,
+     *         description="Relic detail",
+     *
+     *         @OA\JsonContent(ref="#/components/schemas/RelicResource")
+     *     ),
+     *
+     *     @OA\Response(response=404, description="Not found")
+     * )
+     */
     public function show(Relic $relic): RelicResource
     {
         return new RelicResource(
@@ -76,9 +170,30 @@ class RelicController extends Controller
         );
     }
 
-    /* ---------------------------------------------------------------------
-     |  Store  –  POST /api/v1/relics
-     |---------------------------------------------------------------------*/
+    /**
+     * Create a relic.
+     *
+     * @OA\Post(
+     *     path="/api/v1/relics",
+     *     summary="Create a relic",
+     *     tags={"Relics"},
+     *
+     *     @OA\RequestBody(
+     *         required=true,
+     *
+     *         @OA\JsonContent(ref="#/components/schemas/StoreRelicRequest")
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=201,
+     *         description="Created",
+     *
+     *         @OA\JsonContent(ref="#/components/schemas/RelicResource")
+     *     ),
+     *
+     *     @OA\Response(response=422, description="Validation error")
+     * )
+     */
     public function store(StoreRelicRequest $request): JsonResponse
     {
         $validated = $request->validated();
@@ -98,9 +213,36 @@ class RelicController extends Controller
         return response()->json($relic->load(['tier', 'bonuses']), Response::HTTP_CREATED);
     }
 
-    /* ---------------------------------------------------------------------
-     |  Update  –  PUT/PATCH /api/v1/relics/{relic}
-     |---------------------------------------------------------------------*/
+    /**
+     * Update a relic.
+     *
+     * @OA\Patch(
+     *     path="/api/v1/relics/{relic}",
+     *     summary="Update a relic",
+     *     tags={"Relics"},
+     *
+     *     @OA\Parameter(
+     *         name="relic", in="path", required=true,
+     *
+     *         @OA\Schema(type="integer", example=1)
+     *     ),
+     *
+     *     @OA\RequestBody(
+     *
+     *         @OA\JsonContent(ref="#/components/schemas/UpdateRelicRequest")
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=200,
+     *         description="Updated relic",
+     *
+     *         @OA\JsonContent(ref="#/components/schemas/RelicResource")
+     *     ),
+     *
+     *     @OA\Response(response=422, description="Validation error"),
+     *     @OA\Response(response=404, description="Not found")
+     * )
+     */
     public function update(UpdateRelicRequest $request, Relic $relic): JsonResponse
     {
         $validated = $request->validated();
