@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Api\V1\BackgroundSkinController;
 use App\Http\Controllers\Api\V1\BonusCategoryController;
 use App\Http\Controllers\Api\V1\BonusTypeController;
 use App\Http\Controllers\Api\V1\RelicBonusController;
@@ -17,6 +18,7 @@ Route::prefix('v1')
         Route::apiResource('tiers', TierController::class);
         Route::apiResource('bonus-categories', BonusCategoryController::class);
         Route::apiResource('bonus-types', BonusTypeController::class);
+        Route::apiResource('background-skins', BackgroundSkinController::class);
 
         // Main resource
         Route::apiResource('relics', RelicController::class);

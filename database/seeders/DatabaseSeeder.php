@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             TierSeeder::class,
             BonusTypeSeeder::class,
             RelicSeeder::class,
-            RelicBonusSeeder::class,
+            BackgroundSkinSeeder::class,
         ]);
     }
 }

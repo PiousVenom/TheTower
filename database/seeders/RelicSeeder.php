@@ -491,14 +491,14 @@ class RelicSeeder extends Seeder
                 'tier'             => 'Rare',
                 'bonus_type'       => 'Knockback Force',
                 'value'            => 2,
-                'unlock_condition' => 'Earn 350 medals Invanders event',
+                'unlock_condition' => 'Earn 350 medals Invaders event',
             ],
             [
                 'name'             => 'Abduction Signal',
                 'tier'             => 'Rare',
                 'bonus_type'       => 'Crit Factor',
                 'value'            => 2,
-                'unlock_condition' => 'Premium 550 medals Invanders event',
+                'unlock_condition' => 'Premium 550 medals Invaders event',
             ],
             [
                 'name'             => 'Red Pill',
@@ -599,7 +599,7 @@ class RelicSeeder extends Seeder
                 'unlock_condition' => 'Earn 700 medals Halloween event',
             ],
             [
-                'name'             => 'Sakura Latern',
+                'name'             => 'Sakura Lantern',
                 'tier'             => 'Epic',
                 'bonus_type'       => 'Coins',
                 'value'            => 5,
@@ -816,7 +816,7 @@ class RelicSeeder extends Seeder
                 'unlock_condition' => 'Earn 700 medals New Year (II) event',
             ],
             [
-                'name'             => 'Moutain Goat',
+                'name'             => 'Mountain Goat',
                 'tier'             => 'Epic',
                 'bonus_type'       => 'Health',
                 'value'            => 5,
@@ -1005,7 +1005,7 @@ class RelicSeeder extends Seeder
                 'unlock_condition' => 'Beat w4500 in T17',
             ],
             [
-                'name'             => 'T: XVIII Sigularity',
+                'name'             => 'T: XVIII Singularity',
                 'tier'             => 'Legendary',
                 'bonus_type'       => 'Lab Speed',
                 'value'            => 10,
@@ -1024,7 +1024,7 @@ class RelicSeeder extends Seeder
             // 1️⃣ Resolve (or create) the tier
             $tierId = Tier::where(['name' => $row['tier']])->value('id');
 
-            // 2️⃣ Resolve the bonus type  (assumes BonusTypeSeeder has run)
+            // 2️⃣ Resolve the bonus type (assumes BonusTypeSeeder has run)
             $bonusTypeId = BonusType::where('name', $row['bonus_type'])->value('id');
 
             // 3️⃣ Create the relic
