@@ -15,30 +15,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @OA\Tag(
- *     name="Background Skins",
- *     description="Manage available background skins"
+ *     name="Background Skins"
  * )
  */
 class BackgroundSkinController extends Controller
 {
-    /**
-     * Soft-delete a background skin.
-     *
-     * @OA\Delete(
-     *     path="/background-skins/{id}",
-     *     summary="Delete background skin",
-     *     tags={"Background Skins"},
-     *
-     *     @OA\Parameter(
-     *         name="id", in="path", required=true,
-     *
-     *         @OA\Schema(type="integer", example=1)
-     *     ),
-     *
-     *     @OA\Response(response=204, description="Deleted"),
-     *     @OA\Response(response=404, description="Not found")
-     * )
-     */
     public function destroy(BackgroundSkin $background_skin): Response
     {
         $background_skin->delete();
@@ -69,31 +50,6 @@ class BackgroundSkinController extends Controller
         );
     }
 
-    /**
-     * Restore a soft-deleted background skin.
-     *
-     * @OA\Patch(
-     *     path="/background-skins/{id}/restore",
-     *     summary="Restore background skin",
-     *     tags={"Background Skins"},
-     *
-     *     @OA\Parameter(
-     *         name="id", in="path", required=true,
-     *
-     *         @OA\Schema(type="integer", example=1)
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=200,
-     *         description="Restored",
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/BackgroundSkinResource")
-     *     ),
-     *
-     *     @OA\Response(response=409, description="Not deleted"),
-     *     @OA\Response(response=404, description="Not found")
-     * )
-     */
     public function restore(int|string $id): JsonResponse
     {
         $skin = BackgroundSkin::withTrashed()->findOrFail($id);
@@ -139,30 +95,6 @@ class BackgroundSkinController extends Controller
         return new BackgroundSkinResource($background_skin);
     }
 
-    /**
-     * Create a new background skin.
-     *
-     * @OA\Post(
-     *     path="/background-skins",
-     *     summary="Create background skin",
-     *     tags={"Background Skins"},
-     *
-     *     @OA\RequestBody(
-     *         required=true,
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/StoreBackgroundSkinRequest")
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=201,
-     *         description="Created",
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/BackgroundSkinResource")
-     *     ),
-     *
-     *     @OA\Response(response=422, description="Validation error")
-     * )
-     */
     public function store(StoreBackgroundSkinRequest $request): JsonResponse
     {
         $skin = BackgroundSkin::create($request->validated());
@@ -173,36 +105,6 @@ class BackgroundSkinController extends Controller
         );
     }
 
-    /**
-     * Update an existing background skin.
-     *
-     * @OA\Patch(
-     *     path="/background-skins/{id}",
-     *     summary="Update background skin",
-     *     tags={"Background Skins"},
-     *
-     *     @OA\Parameter(
-     *         name="id", in="path", required=true,
-     *
-     *         @OA\Schema(type="integer", example=1)
-     *     ),
-     *
-     *     @OA\RequestBody(
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/UpdateBackgroundSkinRequest")
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=200,
-     *         description="Updated",
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/BackgroundSkinResource")
-     *     ),
-     *
-     *     @OA\Response(response=422, description="Validation error"),
-     *     @OA\Response(response=404, description="Not found")
-     * )
-     */
     public function update(
         UpdateBackgroundSkinRequest $request,
         BackgroundSkin $background_skin

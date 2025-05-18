@@ -15,30 +15,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @OA\Tag(
- *     name="Songs",
- *     description="Manage available songs"
+ *     name="Songs"
  * )
  */
 class SongController extends Controller
 {
-    /**
-     * Soft-delete a song.
-     *
-     * @OA\Delete(
-     *     path="/songs/{id}",
-     *     summary="Delete song",
-     *     tags={"Songs"},
-     *
-     *     @OA\Parameter(
-     *         name="id", in="path", required=true,
-     *
-     *         @OA\Schema(type="integer", example=1)
-     *     ),
-     *
-     *     @OA\Response(response=204, description="Deleted"),
-     *     @OA\Response(response=404, description="Not found")
-     * )
-     */
     public function destroy(Song $song): Response
     {
         $song->delete();
@@ -67,31 +48,6 @@ class SongController extends Controller
         return new SongCollection(Song::paginate(50));
     }
 
-    /**
-     * Restore a soft-deleted song.
-     *
-     * @OA\Patch(
-     *     path="/songs/{id}/restore",
-     *     summary="Restore song",
-     *     tags={"Songs"},
-     *
-     *     @OA\Parameter(
-     *         name="id", in="path", required=true,
-     *
-     *         @OA\Schema(type="integer", example=1)
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=200,
-     *         description="Restored song",
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/SongResource")
-     *     ),
-     *
-     *     @OA\Response(response=409, description="Song is not deleted"),
-     *     @OA\Response(response=404, description="Not found")
-     * )
-     */
     public function restore(int|string $id): JsonResponse
     {
         $song = Song::withTrashed()->findOrFail($id);
@@ -139,30 +95,6 @@ class SongController extends Controller
         return new SongResource($song);
     }
 
-    /**
-     * Create a new song.
-     *
-     * @OA\Post(
-     *     path="/songs",
-     *     summary="Create song",
-     *     tags={"Songs"},
-     *
-     *     @OA\RequestBody(
-     *         required=true,
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/StoreSongRequest")
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=201,
-     *         description="Created",
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/SongResource")
-     *     ),
-     *
-     *     @OA\Response(response=422, description="Validation error")
-     * )
-     */
     public function store(StoreSongRequest $request): JsonResponse
     {
         $song = Song::create($request->validated());
@@ -173,36 +105,6 @@ class SongController extends Controller
         );
     }
 
-    /**
-     * Update an existing song.
-     *
-     * @OA\Patch(
-     *     path="/songs/{id}",
-     *     summary="Update song",
-     *     tags={"Songs"},
-     *
-     *     @OA\Parameter(
-     *         name="id", in="path", required=true,
-     *
-     *         @OA\Schema(type="integer", example=1)
-     *     ),
-     *
-     *     @OA\RequestBody(
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/UpdateSongRequest")
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=200,
-     *         description="Updated song",
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/SongResource")
-     *     ),
-     *
-     *     @OA\Response(response=422, description="Validation error"),
-     *     @OA\Response(response=404, description="Not found")
-     * )
-     */
     public function update(UpdateSongRequest $request, Song $song): JsonResponse
     {
         $song->update($request->validated());

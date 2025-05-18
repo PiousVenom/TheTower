@@ -15,30 +15,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @OA\Tag(
- *     name="Profile Banners",
- *     description="Manage available profile banners"
+ *     name="Profile Banners"
  * )
  */
 class ProfileBannerController extends Controller
 {
-    /**
-     * Soft-delete a profile banner.
-     *
-     * @OA\Delete(
-     *     path="/profileBanners/{id}",
-     *     summary="Delete profile banner",
-     *     tags={"Profile Banners"},
-     *
-     *     @OA\Parameter(
-     *         name="id", in="path", required=true,
-     *
-     *         @OA\Schema(type="integer", example=1)
-     *     ),
-     *
-     *     @OA\Response(response=204, description="Deleted"),
-     *     @OA\Response(response=404, description="Not found")
-     * )
-     */
     public function destroy(ProfileBanner $profileBanner): Response
     {
         $profileBanner->delete();
@@ -67,31 +48,6 @@ class ProfileBannerController extends Controller
         return new ProfileBannerCollection(ProfileBanner::paginate(50));
     }
 
-    /**
-     * Restore a soft-deleted profileBanner.
-     *
-     * @OA\Patch(
-     *     path="/profileBanners/{id}/restore",
-     *     summary="Restore profile banner",
-     *     tags={"Profile Banners"},
-     *
-     *     @OA\Parameter(
-     *         name="id", in="path", required=true,
-     *
-     *         @OA\Schema(type="integer", example=1)
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=200,
-     *         description="Restored profile banner",
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/ProfileBannerResource")
-     *     ),
-     *
-     *     @OA\Response(response=409, description="ProfileBanner is not deleted"),
-     *     @OA\Response(response=404, description="Not found")
-     * )
-     */
     public function restore(int|string $id): JsonResponse
     {
         $profileBanner = ProfileBanner::withTrashed()->findOrFail($id);
@@ -139,30 +95,6 @@ class ProfileBannerController extends Controller
         return new ProfileBannerResource($profileBanner);
     }
 
-    /**
-     * Create a new profileBanner.
-     *
-     * @OA\Post(
-     *     path="/profileBanners",
-     *     summary="Create profile banner",
-     *     tags={"Profile Banners"},
-     *
-     *     @OA\RequestBody(
-     *         required=true,
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/StoreProfileBannerRequest")
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=201,
-     *         description="Created",
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/ProfileBannerResource")
-     *     ),
-     *
-     *     @OA\Response(response=422, description="Validation error")
-     * )
-     */
     public function store(StoreProfileBannerRequest $request): JsonResponse
     {
         $profileBanner = ProfileBanner::create($request->validated());
@@ -173,36 +105,6 @@ class ProfileBannerController extends Controller
         );
     }
 
-    /**
-     * Update an existing profileBanner.
-     *
-     * @OA\Patch(
-     *     path="/profileBanners/{id}",
-     *     summary="Update profile banner",
-     *     tags={"Profile Banners"},
-     *
-     *     @OA\Parameter(
-     *         name="id", in="path", required=true,
-     *
-     *         @OA\Schema(type="integer", example=1)
-     *     ),
-     *
-     *     @OA\RequestBody(
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/UpdateProfileBannerRequest")
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=200,
-     *         description="Updated profile banner",
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/ProfileBannerResource")
-     *     ),
-     *
-     *     @OA\Response(response=422, description="Validation error"),
-     *     @OA\Response(response=404, description="Not found")
-     * )
-     */
     public function update(UpdateProfileBannerRequest $request, ProfileBanner $profileBanner): JsonResponse
     {
         $profileBanner->update($request->validated());

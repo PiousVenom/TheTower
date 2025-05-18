@@ -15,30 +15,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @OA\Tag(
- *     name="Guardians",
- *     description="Manage available guardians"
+ *     name="Guardians"
  * )
  */
 class GuardianController extends Controller
 {
-    /**
-     * Soft-delete a guardian.
-     *
-     * @OA\Delete(
-     *     path="/guardians/{id}",
-     *     summary="Delete guardian",
-     *     tags={"Guardians"},
-     *
-     *     @OA\Parameter(
-     *         name="id", in="path", required=true,
-     *
-     *         @OA\Schema(type="integer", example=1)
-     *     ),
-     *
-     *     @OA\Response(response=204, description="Deleted"),
-     *     @OA\Response(response=404, description="Not found")
-     * )
-     */
     public function destroy(Guardian $guardian): Response
     {
         $guardian->delete();
@@ -67,31 +48,6 @@ class GuardianController extends Controller
         return new GuardianCollection(Guardian::paginate(50));
     }
 
-    /**
-     * Restore a soft-deleted guardian.
-     *
-     * @OA\Patch(
-     *     path="/guardians/{id}/restore",
-     *     summary="Restore guardian",
-     *     tags={"Guardians"},
-     *
-     *     @OA\Parameter(
-     *         name="id", in="path", required=true,
-     *
-     *         @OA\Schema(type="integer", example=1)
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=200,
-     *         description="Restored guardian",
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/GuardianResource")
-     *     ),
-     *
-     *     @OA\Response(response=409, description="Guardian is not deleted"),
-     *     @OA\Response(response=404, description="Not found")
-     * )
-     */
     public function restore(int|string $id): JsonResponse
     {
         $guardian = Guardian::withTrashed()->findOrFail($id);
@@ -139,30 +95,6 @@ class GuardianController extends Controller
         return new GuardianResource($guardian);
     }
 
-    /**
-     * Create a new guardian.
-     *
-     * @OA\Post(
-     *     path="/guardians",
-     *     summary="Create guardian",
-     *     tags={"Guardians"},
-     *
-     *     @OA\RequestBody(
-     *         required=true,
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/StoreGuardianRequest")
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=201,
-     *         description="Created",
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/GuardianResource")
-     *     ),
-     *
-     *     @OA\Response(response=422, description="Validation error")
-     * )
-     */
     public function store(StoreGuardianRequest $request): JsonResponse
     {
         $guardian = Guardian::create($request->validated());
@@ -173,36 +105,6 @@ class GuardianController extends Controller
         );
     }
 
-    /**
-     * Update an existing guardian.
-     *
-     * @OA\Patch(
-     *     path="/guardians/{id}",
-     *     summary="Update guardian",
-     *     tags={"Guardians"},
-     *
-     *     @OA\Parameter(
-     *         name="id", in="path", required=true,
-     *
-     *         @OA\Schema(type="integer", example=1)
-     *     ),
-     *
-     *     @OA\RequestBody(
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/UpdateGuardianRequest")
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=200,
-     *         description="Updated guardian",
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/GuardianResource")
-     *     ),
-     *
-     *     @OA\Response(response=422, description="Validation error"),
-     *     @OA\Response(response=404, description="Not found")
-     * )
-     */
     public function update(UpdateGuardianRequest $request, Guardian $guardian): JsonResponse
     {
         $guardian->update($request->validated());

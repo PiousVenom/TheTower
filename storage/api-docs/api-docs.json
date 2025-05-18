@@ -12,6 +12,28 @@
         }
     ],
     "paths": {
+        "/background-skins": {
+            "get": {
+                "tags": [
+                    "Background Skins"
+                ],
+                "summary": "List background skins",
+                "description": "List background skins (paginated).",
+                "operationId": "57c8ca3b93ed9359d2465f4821fe5ade",
+                "responses": {
+                    "200": {
+                        "description": "Paginated list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BackgroundSkinCollection"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/background-skins/{id}": {
             "get": {
                 "tags": [
@@ -46,171 +68,26 @@
                         "description": "Not found"
                     }
                 }
-            },
-            "delete": {
-                "tags": [
-                    "Background Skins"
-                ],
-                "summary": "Delete background skin",
-                "description": "Soft-delete a background skin.",
-                "operationId": "b410a25ce3d601bf737c527dcbe05839",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Deleted"
-                    },
-                    "404": {
-                        "description": "Not found"
-                    }
-                }
-            },
-            "patch": {
-                "tags": [
-                    "Background Skins"
-                ],
-                "summary": "Update background skin",
-                "description": "Update an existing background skin.",
-                "operationId": "67f2718d174d82a87d7ae3d13068e7c3",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/UpdateBackgroundSkinRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Updated",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/BackgroundSkinResource"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    },
-                    "404": {
-                        "description": "Not found"
-                    }
-                }
             }
         },
-        "/background-skins": {
+        "/guardians": {
             "get": {
                 "tags": [
-                    "Background Skins"
+                    "Guardians"
                 ],
-                "summary": "List background skins",
-                "description": "List background skins (paginated).",
-                "operationId": "57c8ca3b93ed9359d2465f4821fe5ade",
+                "summary": "List guardians",
+                "description": "List guardians (paginated).",
+                "operationId": "68beb576f44c06a01f1846ab6d1d5b32",
                 "responses": {
                     "200": {
-                        "description": "Paginated list",
+                        "description": "Paginated list of guardians",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/BackgroundSkinCollection"
+                                    "$ref": "#/components/schemas/GuardianCollection"
                                 }
                             }
                         }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Background Skins"
-                ],
-                "summary": "Create background skin",
-                "description": "Create a new background skin.",
-                "operationId": "6c7b517a43708751b9e2ef4312a98b7e",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/StoreBackgroundSkinRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/BackgroundSkinResource"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    }
-                }
-            }
-        },
-        "/background-skins/{id}/restore": {
-            "patch": {
-                "tags": [
-                    "Background Skins"
-                ],
-                "summary": "Restore background skin",
-                "description": "Restore a soft-deleted background skin.",
-                "operationId": "d565a3546cecfb2cc7ac1ee043990449",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Restored",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/BackgroundSkinResource"
-                                }
-                            }
-                        }
-                    },
-                    "409": {
-                        "description": "Not deleted"
-                    },
-                    "404": {
-                        "description": "Not found"
                     }
                 }
             }
@@ -249,171 +126,26 @@
                         "description": "Not found"
                     }
                 }
-            },
-            "delete": {
-                "tags": [
-                    "Guardians"
-                ],
-                "summary": "Delete guardian",
-                "description": "Soft-delete a guardian.",
-                "operationId": "fdd0247f282a4a336c0de2ccc6817399",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Deleted"
-                    },
-                    "404": {
-                        "description": "Not found"
-                    }
-                }
-            },
-            "patch": {
-                "tags": [
-                    "Guardians"
-                ],
-                "summary": "Update guardian",
-                "description": "Update an existing guardian.",
-                "operationId": "50672f79a16f72257e4c987ba6225d10",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/UpdateGuardianRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Updated guardian",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/GuardianResource"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    },
-                    "404": {
-                        "description": "Not found"
-                    }
-                }
             }
         },
-        "/guardians": {
+        "/menus": {
             "get": {
                 "tags": [
-                    "Guardians"
+                    "Menus"
                 ],
-                "summary": "List guardians",
-                "description": "List guardians (paginated).",
-                "operationId": "68beb576f44c06a01f1846ab6d1d5b32",
+                "summary": "List menus",
+                "description": "List menus (paginated).",
+                "operationId": "6a471d71b55cf04ae64844611e541c4a",
                 "responses": {
                     "200": {
-                        "description": "Paginated list of guardians",
+                        "description": "Paginated list of menus",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/GuardianCollection"
+                                    "$ref": "#/components/schemas/MenuCollection"
                                 }
                             }
                         }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Guardians"
-                ],
-                "summary": "Create guardian",
-                "description": "Create a new guardian.",
-                "operationId": "8b24d41ba56246e2374a71fdbb584834",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/StoreGuardianRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/GuardianResource"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    }
-                }
-            }
-        },
-        "/guardians/{id}/restore": {
-            "patch": {
-                "tags": [
-                    "Guardians"
-                ],
-                "summary": "Restore guardian",
-                "description": "Restore a soft-deleted guardian.",
-                "operationId": "196f13d001343cfcf4da12b842a478c8",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Restored guardian",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/GuardianResource"
-                                }
-                            }
-                        }
-                    },
-                    "409": {
-                        "description": "Guardian is not deleted"
-                    },
-                    "404": {
-                        "description": "Not found"
                     }
                 }
             }
@@ -452,171 +184,26 @@
                         "description": "Not found"
                     }
                 }
-            },
-            "delete": {
-                "tags": [
-                    "Menus"
-                ],
-                "summary": "Delete menu",
-                "description": "Soft-delete a menu.",
-                "operationId": "60298d7d2d9100279e4904bc90ef15bf",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Deleted"
-                    },
-                    "404": {
-                        "description": "Not found"
-                    }
-                }
-            },
-            "patch": {
-                "tags": [
-                    "Menus"
-                ],
-                "summary": "Update menu",
-                "description": "Update an existing menu.",
-                "operationId": "e3ae92ff310432ca0784611b874a454b",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/UpdateMenuRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Updated menu",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/MenuResource"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    },
-                    "404": {
-                        "description": "Not found"
-                    }
-                }
             }
         },
-        "/menus": {
+        "/profileBanners": {
             "get": {
                 "tags": [
-                    "Menus"
+                    "Profile Banners"
                 ],
-                "summary": "List menus",
-                "description": "List menus (paginated).",
-                "operationId": "6a471d71b55cf04ae64844611e541c4a",
+                "summary": "List profile banners",
+                "description": "List profileBanners (paginated).",
+                "operationId": "e51086f79727f055aa35e51bccedaec9",
                 "responses": {
                     "200": {
-                        "description": "Paginated list of menus",
+                        "description": "Paginated list of profile banners",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/MenuCollection"
+                                    "$ref": "#/components/schemas/ProfileBannerCollection"
                                 }
                             }
                         }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Menus"
-                ],
-                "summary": "Create menu",
-                "description": "Create a new menu.",
-                "operationId": "919180cbe58d90b236fa054287c4cfcc",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/StoreMenuRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/MenuResource"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    }
-                }
-            }
-        },
-        "/menus/{id}/restore": {
-            "patch": {
-                "tags": [
-                    "Menus"
-                ],
-                "summary": "Restore menu",
-                "description": "Restore a soft-deleted menu.",
-                "operationId": "1c62f9c9208d82ac548b16ea17872aae",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Restored menu",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/MenuResource"
-                                }
-                            }
-                        }
-                    },
-                    "409": {
-                        "description": "Menu is not deleted"
-                    },
-                    "404": {
-                        "description": "Not found"
                     }
                 }
             }
@@ -650,283 +237,6 @@
                                 }
                             }
                         }
-                    },
-                    "404": {
-                        "description": "Not found"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Profile Banners"
-                ],
-                "summary": "Delete profile banner",
-                "description": "Soft-delete a profile banner.",
-                "operationId": "c331ed96990d64776bb17e6ebd4a9b59",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Deleted"
-                    },
-                    "404": {
-                        "description": "Not found"
-                    }
-                }
-            },
-            "patch": {
-                "tags": [
-                    "Profile Banners"
-                ],
-                "summary": "Update profile banner",
-                "description": "Update an existing profileBanner.",
-                "operationId": "6620de2108f88e54bbfb1a89331e2e89",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/UpdateProfileBannerRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Updated profile banner",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ProfileBannerResource"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    },
-                    "404": {
-                        "description": "Not found"
-                    }
-                }
-            }
-        },
-        "/profileBanners": {
-            "get": {
-                "tags": [
-                    "Profile Banners"
-                ],
-                "summary": "List profile banners",
-                "description": "List profileBanners (paginated).",
-                "operationId": "e51086f79727f055aa35e51bccedaec9",
-                "responses": {
-                    "200": {
-                        "description": "Paginated list of profile banners",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ProfileBannerCollection"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Profile Banners"
-                ],
-                "summary": "Create profile banner",
-                "description": "Create a new profileBanner.",
-                "operationId": "1a2695d49d7ef308d5ddd1f2e954b31b",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/StoreProfileBannerRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ProfileBannerResource"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    }
-                }
-            }
-        },
-        "/profileBanners/{id}/restore": {
-            "patch": {
-                "tags": [
-                    "Profile Banners"
-                ],
-                "summary": "Restore profile banner",
-                "description": "Restore a soft-deleted profileBanner.",
-                "operationId": "7b6eb65b9a3156891413c9ba9acd33a9",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Restored profile banner",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ProfileBannerResource"
-                                }
-                            }
-                        }
-                    },
-                    "409": {
-                        "description": "ProfileBanner is not deleted"
-                    },
-                    "404": {
-                        "description": "Not found"
-                    }
-                }
-            }
-        },
-        "/relics/{relic}": {
-            "get": {
-                "tags": [
-                    "Relics"
-                ],
-                "summary": "Get a relic",
-                "description": "Show a single relic.",
-                "operationId": "842ce04485b9073c5d3899c4ca0c5ee3",
-                "parameters": [
-                    {
-                        "name": "relic",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Relic detail",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/RelicResource"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not found"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Relics"
-                ],
-                "summary": "Soft-delete a relic",
-                "description": "Delete (soft-delete) a relic.",
-                "operationId": "22c00018e33b57698893075e60200bcc",
-                "parameters": [
-                    {
-                        "name": "relic",
-                        "in": "path",
-                        "description": "Relic ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Deleted (no content)"
-                    },
-                    "404": {
-                        "description": "Relic not found"
-                    }
-                }
-            },
-            "patch": {
-                "tags": [
-                    "Relics"
-                ],
-                "summary": "Update a relic",
-                "description": "Update a relic.",
-                "operationId": "af3cbe187885adf3d0353f6a99ba0d88",
-                "parameters": [
-                    {
-                        "name": "relic",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/UpdateRelicRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Updated relic",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/RelicResource"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation error"
                     },
                     "404": {
                         "description": "Not found"
@@ -974,54 +284,20 @@
                         }
                     }
                 }
-            },
-            "post": {
-                "tags": [
-                    "Relics"
-                ],
-                "summary": "Create a relic",
-                "description": "Create a relic.",
-                "operationId": "a83793aa596e72a5949e794ad5e9b10b",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/StoreRelicRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/RelicResource"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    }
-                }
             }
         },
-        "/relics/{id}/restore": {
-            "patch": {
+        "/relics/{relic}": {
+            "get": {
                 "tags": [
                     "Relics"
                 ],
-                "summary": "Restore a soft-deleted relic",
-                "description": "Restore (undelete) a relic.",
-                "operationId": "7d5a0e0f118a602d8f10e6ebaa971768",
+                "summary": "Get a relic",
+                "description": "Show a single relic.",
+                "operationId": "842ce04485b9073c5d3899c4ca0c5ee3",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "relic",
                         "in": "path",
-                        "description": "Relic ID",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1031,7 +307,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Restored relic",
+                        "description": "Relic detail",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1040,11 +316,30 @@
                             }
                         }
                     },
-                    "409": {
-                        "description": "Relic is not deleted"
-                    },
                     "404": {
                         "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/songs": {
+            "get": {
+                "tags": [
+                    "Songs"
+                ],
+                "summary": "List songs",
+                "description": "List songs (paginated).",
+                "operationId": "0751edaebbf4754eea938a020909339d",
+                "responses": {
+                    "200": {
+                        "description": "Paginated list of songs",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SongCollection"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1083,171 +378,26 @@
                         "description": "Not found"
                     }
                 }
-            },
-            "delete": {
-                "tags": [
-                    "Songs"
-                ],
-                "summary": "Delete song",
-                "description": "Soft-delete a song.",
-                "operationId": "3c7f1dd92626ad1f86d40cef09534b20",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Deleted"
-                    },
-                    "404": {
-                        "description": "Not found"
-                    }
-                }
-            },
-            "patch": {
-                "tags": [
-                    "Songs"
-                ],
-                "summary": "Update song",
-                "description": "Update an existing song.",
-                "operationId": "fa98d6c9c9c76e242d50148aa3842d17",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/UpdateSongRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Updated song",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SongResource"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    },
-                    "404": {
-                        "description": "Not found"
-                    }
-                }
             }
         },
-        "/songs": {
+        "/tower-skins": {
             "get": {
                 "tags": [
-                    "Songs"
+                    "Tower Skins"
                 ],
-                "summary": "List songs",
-                "description": "List songs (paginated).",
-                "operationId": "0751edaebbf4754eea938a020909339d",
+                "summary": "List tower skins",
+                "description": "List tower skins (paginated).",
+                "operationId": "5ec2006a213d56f4459c014aac4625ae",
                 "responses": {
                     "200": {
-                        "description": "Paginated list of songs",
+                        "description": "Paginated list of tower skins",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/SongCollection"
+                                    "$ref": "#/components/schemas/TowerSkinCollection"
                                 }
                             }
                         }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Songs"
-                ],
-                "summary": "Create song",
-                "description": "Create a new song.",
-                "operationId": "b7ea7730fabf1fb0142ca570702358b3",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/StoreSongRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SongResource"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    }
-                }
-            }
-        },
-        "/songs/{id}/restore": {
-            "patch": {
-                "tags": [
-                    "Songs"
-                ],
-                "summary": "Restore song",
-                "description": "Restore a soft-deleted song.",
-                "operationId": "0513d957cdeed83627e1d1f0603254e3",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Restored song",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SongResource"
-                                }
-                            }
-                        }
-                    },
-                    "409": {
-                        "description": "Song is not deleted"
-                    },
-                    "404": {
-                        "description": "Not found"
                     }
                 }
             }
@@ -1281,173 +431,6 @@
                                 }
                             }
                         }
-                    },
-                    "404": {
-                        "description": "Not found"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Tower Skins"
-                ],
-                "summary": "Delete tower skin",
-                "description": "Soft-delete a tower skin.",
-                "operationId": "20acb679873a55cfc298e7333159bdf2",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Deleted"
-                    },
-                    "404": {
-                        "description": "Not found"
-                    }
-                }
-            },
-            "patch": {
-                "tags": [
-                    "Tower Skins"
-                ],
-                "summary": "Update tower skin",
-                "description": "Update an existing tower skin.",
-                "operationId": "4ca75b94098a8095ae45792690df7fc5",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/UpdateTowerSkinRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Updated tower skin",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/TowerSkinResource"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    },
-                    "404": {
-                        "description": "Not found"
-                    }
-                }
-            }
-        },
-        "/tower-skins": {
-            "get": {
-                "tags": [
-                    "Tower Skins"
-                ],
-                "summary": "List tower skins",
-                "description": "List tower skins (paginated).",
-                "operationId": "5ec2006a213d56f4459c014aac4625ae",
-                "responses": {
-                    "200": {
-                        "description": "Paginated list of tower skins",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/TowerSkinCollection"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Tower Skins"
-                ],
-                "summary": "Create tower skin",
-                "description": "Create a new tower skin.",
-                "operationId": "328c3ad218c801259f63fd929184672b",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/StoreTowerSkinRequest"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/TowerSkinResource"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    }
-                }
-            }
-        },
-        "/tower-skins/{id}/restore": {
-            "patch": {
-                "tags": [
-                    "Tower Skins"
-                ],
-                "summary": "Restore tower skin",
-                "description": "Restore a soft-deleted tower skin.",
-                "operationId": "ce8fd34da0ddb320fe442f44ce075b63",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "example": 1
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Restored tower skin",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/TowerSkinResource"
-                                }
-                            }
-                        }
-                    },
-                    "409": {
-                        "description": "Tower skin is not deleted"
                     },
                     "404": {
                         "description": "Not found"
@@ -2719,32 +1702,25 @@
     },
     "tags": [
         {
-            "name": "Background Skins",
-            "description": "Manage available background skins"
+            "name": "Background Skins"
         },
         {
-            "name": "Guardians",
-            "description": "Manage available guardians"
+            "name": "Guardians"
         },
         {
-            "name": "Menus",
-            "description": "Manage available menus"
+            "name": "Menus"
         },
         {
-            "name": "Profile Banners",
-            "description": "Manage available profile banners"
+            "name": "Profile Banners"
         },
         {
-            "name": "Relics",
-            "description": "CRUD & restore operations for relics"
+            "name": "Relics"
         },
         {
-            "name": "Songs",
-            "description": "Manage available songs"
+            "name": "Songs"
         },
         {
-            "name": "Tower Skins",
-            "description": "Manage available tower skins"
+            "name": "Tower Skins"
         }
     ]
 }

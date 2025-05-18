@@ -15,30 +15,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @OA\Tag(
- *     name="Menus",
- *     description="Manage available menus"
+ *     name="Menus"
  * )
  */
 class MenuController extends Controller
 {
-    /**
-     * Soft-delete a menu.
-     *
-     * @OA\Delete(
-     *     path="/menus/{id}",
-     *     summary="Delete menu",
-     *     tags={"Menus"},
-     *
-     *     @OA\Parameter(
-     *         name="id", in="path", required=true,
-     *
-     *         @OA\Schema(type="integer", example=1)
-     *     ),
-     *
-     *     @OA\Response(response=204, description="Deleted"),
-     *     @OA\Response(response=404, description="Not found")
-     * )
-     */
     public function destroy(Menu $menu): Response
     {
         $menu->delete();
@@ -67,31 +48,6 @@ class MenuController extends Controller
         return new MenuCollection(Menu::paginate(50));
     }
 
-    /**
-     * Restore a soft-deleted menu.
-     *
-     * @OA\Patch(
-     *     path="/menus/{id}/restore",
-     *     summary="Restore menu",
-     *     tags={"Menus"},
-     *
-     *     @OA\Parameter(
-     *         name="id", in="path", required=true,
-     *
-     *         @OA\Schema(type="integer", example=1)
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=200,
-     *         description="Restored menu",
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/MenuResource")
-     *     ),
-     *
-     *     @OA\Response(response=409, description="Menu is not deleted"),
-     *     @OA\Response(response=404, description="Not found")
-     * )
-     */
     public function restore(int|string $id): JsonResponse
     {
         $menu = Menu::withTrashed()->findOrFail($id);
@@ -139,30 +95,6 @@ class MenuController extends Controller
         return new MenuResource($menu);
     }
 
-    /**
-     * Create a new menu.
-     *
-     * @OA\Post(
-     *     path="/menus",
-     *     summary="Create menu",
-     *     tags={"Menus"},
-     *
-     *     @OA\RequestBody(
-     *         required=true,
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/StoreMenuRequest")
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=201,
-     *         description="Created",
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/MenuResource")
-     *     ),
-     *
-     *     @OA\Response(response=422, description="Validation error")
-     * )
-     */
     public function store(StoreMenuRequest $request): JsonResponse
     {
         $menu = Menu::create($request->validated());
@@ -173,36 +105,6 @@ class MenuController extends Controller
         );
     }
 
-    /**
-     * Update an existing menu.
-     *
-     * @OA\Patch(
-     *     path="/menus/{id}",
-     *     summary="Update menu",
-     *     tags={"Menus"},
-     *
-     *     @OA\Parameter(
-     *         name="id", in="path", required=true,
-     *
-     *         @OA\Schema(type="integer", example=1)
-     *     ),
-     *
-     *     @OA\RequestBody(
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/UpdateMenuRequest")
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=200,
-     *         description="Updated menu",
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/MenuResource")
-     *     ),
-     *
-     *     @OA\Response(response=422, description="Validation error"),
-     *     @OA\Response(response=404, description="Not found")
-     * )
-     */
     public function update(UpdateMenuRequest $request, Menu $menu): JsonResponse
     {
         $menu->update($request->validated());

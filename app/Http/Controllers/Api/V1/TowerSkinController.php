@@ -15,32 +15,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @OA\Tag(
- *     name="Tower Skins",
- *     description="Manage available tower skins"
+ *     name="Tower Skins"
  * )
  */
 class TowerSkinController extends Controller
 {
-    /**
-     * Soft-delete a tower skin.
-     *
-     * @OA\Delete(
-     *     path="/tower-skins/{id}",
-     *     summary="Delete tower skin",
-     *     tags={"Tower Skins"},
-     *
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         required=true,
-     *
-     *         @OA\Schema(type="integer", example=1)
-     *     ),
-     *
-     *     @OA\Response(response=204, description="Deleted"),
-     *     @OA\Response(response=404, description="Not found")
-     * )
-     */
     public function destroy(TowerSkin $tower_skin): Response
     {
         $tower_skin->delete();
@@ -71,33 +50,6 @@ class TowerSkinController extends Controller
         );
     }
 
-    /**
-     * Restore a soft-deleted tower skin.
-     *
-     * @OA\Patch(
-     *     path="/tower-skins/{id}/restore",
-     *     summary="Restore tower skin",
-     *     tags={"Tower Skins"},
-     *
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         required=true,
-     *
-     *         @OA\Schema(type="integer", example=1)
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=200,
-     *         description="Restored tower skin",
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/TowerSkinResource")
-     *     ),
-     *
-     *     @OA\Response(response=409, description="Tower skin is not deleted"),
-     *     @OA\Response(response=404, description="Not found")
-     * )
-     */
     public function restore(int|string $id): JsonResponse
     {
         $skin = TowerSkin::withTrashed()->findOrFail($id);
@@ -147,30 +99,6 @@ class TowerSkinController extends Controller
         return new TowerSkinResource($tower_skin);
     }
 
-    /**
-     * Create a new tower skin.
-     *
-     * @OA\Post(
-     *     path="/tower-skins",
-     *     summary="Create tower skin",
-     *     tags={"Tower Skins"},
-     *
-     *     @OA\RequestBody(
-     *         required=true,
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/StoreTowerSkinRequest")
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=201,
-     *         description="Created",
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/TowerSkinResource")
-     *     ),
-     *
-     *     @OA\Response(response=422, description="Validation error")
-     * )
-     */
     public function store(StoreTowerSkinRequest $request): JsonResponse
     {
         $skin = TowerSkin::create($request->validated());
@@ -181,38 +109,6 @@ class TowerSkinController extends Controller
         );
     }
 
-    /**
-     * Update an existing tower skin.
-     *
-     * @OA\Patch(
-     *     path="/tower-skins/{id}",
-     *     summary="Update tower skin",
-     *     tags={"Tower Skins"},
-     *
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         required=true,
-     *
-     *         @OA\Schema(type="integer", example=1)
-     *     ),
-     *
-     *     @OA\RequestBody(
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/UpdateTowerSkinRequest")
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=200,
-     *         description="Updated tower skin",
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/TowerSkinResource")
-     *     ),
-     *
-     *     @OA\Response(response=422, description="Validation error"),
-     *     @OA\Response(response=404, description="Not found")
-     * )
-     */
     public function update(UpdateTowerSkinRequest $request, TowerSkin $tower_skin): JsonResponse
     {
         $tower_skin->update($request->validated());

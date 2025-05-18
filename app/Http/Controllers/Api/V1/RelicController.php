@@ -14,44 +14,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- *  Relic endpoints (API v1).
- *
  * @OA\Tag(
- *     name="Relics",
- *     description="CRUD & restore operations for relics"
+ *     name="Relics"
  * )
- *
- *  Global path prefix comes from routes:
  */
 class RelicController extends Controller
 {
-    /**
-     * Delete (soft-delete) a relic.
-     *
-     * @OA\Delete(
-     *     path="/relics/{relic}",
-     *     summary="Soft-delete a relic",
-     *     tags={"Relics"},
-     *
-     *     @OA\Parameter(
-     *         name="relic",
-     *         in="path",
-     *         required=true,
-     *         description="Relic ID",
-     *
-     *         @OA\Schema(type="integer", example=1)
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=204,
-     *         description="Deleted (no content)"
-     *     ),
-     *     @OA\Response(
-     *         response=404,
-     *         description="Relic not found"
-     *     )
-     * )
-     */
     public function destroy(Relic $relic): Response
     {
         $relic->delete();
@@ -92,34 +60,6 @@ class RelicController extends Controller
         );
     }
 
-    /**
-     * Restore (undelete) a relic.
-     *
-     * @OA\Patch(
-     *     path="/relics/{id}/restore",
-     *     summary="Restore a soft-deleted relic",
-     *     tags={"Relics"},
-     *
-     *     @OA\Parameter(
-     *         name="id", in="path", required=true, description="Relic ID",
-     *
-     *         @OA\Schema(type="integer", example=1)
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=200,
-     *         description="Restored relic",
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/RelicResource")
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=409,
-     *         description="Relic is not deleted"
-     *     ),
-     *     @OA\Response(response=404, description="Not found")
-     * )
-     */
     public function restore(int|string $id): RelicResource|JsonResponse
     {
         /** @var Relic $relic */
@@ -169,30 +109,6 @@ class RelicController extends Controller
         );
     }
 
-    /**
-     * Create a relic.
-     *
-     * @OA\Post(
-     *     path="/relics",
-     *     summary="Create a relic",
-     *     tags={"Relics"},
-     *
-     *     @OA\RequestBody(
-     *         required=true,
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/StoreRelicRequest")
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=201,
-     *         description="Created",
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/RelicResource")
-     *     ),
-     *
-     *     @OA\Response(response=422, description="Validation error")
-     * )
-     */
     public function store(StoreRelicRequest $request): JsonResponse
     {
         $validated = $request->validated();
@@ -212,36 +128,6 @@ class RelicController extends Controller
         return response()->json($relic->load(['tier', 'bonuses']), Response::HTTP_CREATED);
     }
 
-    /**
-     * Update a relic.
-     *
-     * @OA\Patch(
-     *     path="/relics/{relic}",
-     *     summary="Update a relic",
-     *     tags={"Relics"},
-     *
-     *     @OA\Parameter(
-     *         name="relic", in="path", required=true,
-     *
-     *         @OA\Schema(type="integer", example=1)
-     *     ),
-     *
-     *     @OA\RequestBody(
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/UpdateRelicRequest")
-     *     ),
-     *
-     *     @OA\Response(
-     *         response=200,
-     *         description="Updated relic",
-     *
-     *         @OA\JsonContent(ref="#/components/schemas/RelicResource")
-     *     ),
-     *
-     *     @OA\Response(response=422, description="Validation error"),
-     *     @OA\Response(response=404, description="Not found")
-     * )
-     */
     public function update(UpdateRelicRequest $request, Relic $relic): JsonResponse
     {
         $validated = $request->validated();
