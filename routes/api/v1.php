@@ -18,14 +18,14 @@ Route::prefix('v1')
     ->middleware('api')
     ->name('api.v1.')
     ->group(static function (): void {
-        Route::apiResource('tiers', TierController::class);
-        Route::apiResource('bonus-categories', BonusCategoryController::class);
-        Route::apiResource('bonus-types', BonusTypeController::class);
-        Route::apiResource('background-skins', BackgroundSkinController::class);
-        Route::apiResource('tower-skins', TowerSkinController::class);
-        Route::apiResource('songs', SongController::class);
-        Route::apiResource('relics', RelicController::class);
-        Route::apiResource('guardians', GuardianController::class);
-        Route::apiResource('menus', MenuController::class);
-        Route::apiResource('profile-banners', ProfileBannerController::class);
+        //        Route::apiResource('tiers', TierController::class);
+        //        Route::apiResource('bonus-categories', BonusCategoryController::class);
+        //        Route::apiResource('bonus-types', BonusTypeController::class);
+        Route::apiResource('background-skins', BackgroundSkinController::class)->only(['index', 'show']);
+        Route::apiResource('tower-skins', TowerSkinController::class)->only(['index', 'show']);
+        Route::apiResource('songs', SongController::class)->only(['index', 'show']);
+        Route::apiResource('relics', RelicController::class)->only(['index', 'show']);
+        Route::apiResource('guardians', GuardianController::class)->only(['index', 'show']);
+        Route::apiResource('menus', MenuController::class)->only(['index', 'show']);
+        Route::apiResource('profile-banners', ProfileBannerController::class)->only(['index', 'show']);
     });
