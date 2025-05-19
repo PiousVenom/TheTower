@@ -1,0 +1,1726 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "The Tower API (v1)",
+        "description": "Endpoints for various resources in The Tower.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "/api/v1",
+            "description": "Version 1"
+        }
+    ],
+    "paths": {
+        "/background-skins": {
+            "get": {
+                "tags": [
+                    "Background Skins"
+                ],
+                "summary": "List background skins",
+                "description": "List background skins (paginated).",
+                "operationId": "57c8ca3b93ed9359d2465f4821fe5ade",
+                "responses": {
+                    "200": {
+                        "description": "Paginated list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BackgroundSkinCollection"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/background-skins/{id}": {
+            "get": {
+                "tags": [
+                    "Background Skins"
+                ],
+                "summary": "Get a background skin",
+                "description": "Retrieve a single background skin.",
+                "operationId": "3411514fab05a93d116134cd2cb1e4cf",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Background skin detail",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BackgroundSkinResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/guardians": {
+            "get": {
+                "tags": [
+                    "Guardians"
+                ],
+                "summary": "List guardians",
+                "description": "List guardians (paginated).",
+                "operationId": "68beb576f44c06a01f1846ab6d1d5b32",
+                "responses": {
+                    "200": {
+                        "description": "Paginated list of guardians",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GuardianCollection"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/guardians/{id}": {
+            "get": {
+                "tags": [
+                    "Guardians"
+                ],
+                "summary": "Get a guardian",
+                "description": "Retrieve a single guardian.",
+                "operationId": "047e192be5a0801ec0558d078ad0fc46",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Guardian detail",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GuardianResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/menus": {
+            "get": {
+                "tags": [
+                    "Menus"
+                ],
+                "summary": "List menus",
+                "description": "List menus (paginated).",
+                "operationId": "6a471d71b55cf04ae64844611e541c4a",
+                "responses": {
+                    "200": {
+                        "description": "Paginated list of menus",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MenuCollection"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/menus/{id}": {
+            "get": {
+                "tags": [
+                    "Menus"
+                ],
+                "summary": "Get a menu",
+                "description": "Retrieve a single menu.",
+                "operationId": "3702f68603c17b4a04e5e5c35f31f5f4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Menu detail",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MenuResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/profileBanners": {
+            "get": {
+                "tags": [
+                    "Profile Banners"
+                ],
+                "summary": "List profile banners",
+                "description": "List profileBanners (paginated).",
+                "operationId": "e51086f79727f055aa35e51bccedaec9",
+                "responses": {
+                    "200": {
+                        "description": "Paginated list of profile banners",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProfileBannerCollection"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/profileBanners/{id}": {
+            "get": {
+                "tags": [
+                    "Profile Banners"
+                ],
+                "summary": "Get a profile banner",
+                "description": "Retrieve a single profileBanner.",
+                "operationId": "2c284d72438c8a699b0fa3d5b21d8ab8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ProfileBanner detail",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProfileBannerResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/relics": {
+            "get": {
+                "tags": [
+                    "Relics"
+                ],
+                "summary": "List relics",
+                "description": "List relics (paginated).",
+                "operationId": "3d53e5fa003de3e936f580caa95c6414",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Items per page (default 50)",
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100,
+                            "minimum": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Paginated list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RelicCollection"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/relics/{relic}": {
+            "get": {
+                "tags": [
+                    "Relics"
+                ],
+                "summary": "Get a relic",
+                "description": "Show a single relic.",
+                "operationId": "842ce04485b9073c5d3899c4ca0c5ee3",
+                "parameters": [
+                    {
+                        "name": "relic",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Relic detail",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RelicResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/songs": {
+            "get": {
+                "tags": [
+                    "Songs"
+                ],
+                "summary": "List songs",
+                "description": "List songs (paginated).",
+                "operationId": "0751edaebbf4754eea938a020909339d",
+                "responses": {
+                    "200": {
+                        "description": "Paginated list of songs",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SongCollection"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/songs/{id}": {
+            "get": {
+                "tags": [
+                    "Songs"
+                ],
+                "summary": "Get a song",
+                "description": "Retrieve a single song.",
+                "operationId": "a0187b84f0a6790cef394acb64b8cd1a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Song detail",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SongResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/tower-skins": {
+            "get": {
+                "tags": [
+                    "Tower Skins"
+                ],
+                "summary": "List tower skins",
+                "description": "List tower skins (paginated).",
+                "operationId": "5ec2006a213d56f4459c014aac4625ae",
+                "responses": {
+                    "200": {
+                        "description": "Paginated list of tower skins",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TowerSkinCollection"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tower-skins/{id}": {
+            "get": {
+                "tags": [
+                    "Tower Skins"
+                ],
+                "summary": "Get a tower skin",
+                "description": "Retrieve a single tower skin.",
+                "operationId": "745ebc4d903f64d0ee5a9dc2170c4371",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tower skin detail",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TowerSkinResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "StoreBackgroundSkinRequest": {
+                "description": "Payload sent when creating a new BackgroundSkin",
+                "required": [
+                    "name",
+                    "value"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Sunset"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.5
+                    }
+                },
+                "type": "object"
+            },
+            "StoreBonusTypeRequest": {
+                "required": [
+                    "name",
+                    "unit",
+                    "bonus_category_id"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Defense Absolute"
+                    },
+                    "unit": {
+                        "description": "How the value is interpreted",
+                        "type": "string",
+                        "enum": [
+                            "percentage",
+                            "flat",
+                            "seconds"
+                        ],
+                        "example": "percentage"
+                    },
+                    "bonus_category_id": {
+                        "description": "Category this bonus belongs to",
+                        "type": "integer",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "StoreGuardianRequest": {
+                "description": "Payload sent when creating a new Guardian",
+                "required": [
+                    "name",
+                    "value"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Epic Battle Theme"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.006
+                    }
+                },
+                "type": "object"
+            },
+            "StoreMenuRequest": {
+                "description": "Payload sent when creating a new Menu",
+                "required": [
+                    "name",
+                    "value"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Epic Battle Theme"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.006
+                    }
+                },
+                "type": "object"
+            },
+            "StoreProfileBannerRequest": {
+                "description": "Payload sent when creating a new ProfileBanner",
+                "required": [
+                    "name",
+                    "value"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Epic Battle Theme"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.006
+                    }
+                },
+                "type": "object"
+            },
+            "StoreRelicRequest": {
+                "required": [
+                    "name",
+                    "tier_id",
+                    "bonus_type_id",
+                    "value"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "No Spoon"
+                    },
+                    "tier_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "example": 2
+                    },
+                    "bonus_type_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "example": 9
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.02
+                    },
+                    "unlock_condition": {
+                        "type": "string",
+                        "example": "Earn 350 medals Matrix event",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "StoreSongRequest": {
+                "description": "Payload sent when creating a new Song",
+                "required": [
+                    "name",
+                    "value"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Epic Battle Theme"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.006
+                    }
+                },
+                "type": "object"
+            },
+            "StoreTierRequest": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Rare"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreTowerSkinRequest": {
+                "description": "Payload sent when creating a new TowerSkin",
+                "required": [
+                    "name",
+                    "value"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Celestial Tower"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.75
+                    },
+                    "eventName": {
+                        "type": "string",
+                        "example": "Guild Season Finale",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateBackgroundSkinRequest": {
+                "description": "Payload for updating an existing BackgroundSkin. All fields optional.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Interstellar"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.75
+                    },
+                    "eventName": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Interstellar"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateBonusTypeRequest": {
+                "description": "Any subset of fields may be supplied to update the bonus type.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Defense Absolute Plus"
+                    },
+                    "unit": {
+                        "type": "string",
+                        "enum": [
+                            "percentage",
+                            "flat",
+                            "seconds"
+                        ],
+                        "example": "flat"
+                    },
+                    "bonus_category_id": {
+                        "type": "integer",
+                        "example": 2
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateGuardianRequest": {
+                "description": "Payload for updating an existing Guardian. All fields optional.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Epic Battle Theme Remix"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.007
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateMenuRequest": {
+                "description": "Payload for updating an existing Menu. All fields optional.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Epic Battle Theme Remix"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.007
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateProfileBannerRequest": {
+                "description": "Payload for updating an existing ProfileBanner. All fields optional.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Epic Battle Theme Remix"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.007
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateRelicRequest": {
+                "description": "Any subset of fields may be supplied to update the relic.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "No Spoon Mk II"
+                    },
+                    "tier_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "example": 3
+                    },
+                    "bonus_type_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "example": 12
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.05
+                    },
+                    "unlock_condition": {
+                        "type": "string",
+                        "example": "Earn 700 medals Matrix event",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateSongRequest": {
+                "description": "Payload for updating an existing Song. All fields optional.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Epic Battle Theme Remix"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.007
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateTierRequest": {
+                "description": "Any subset of fields may be supplied to update the tier.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Epic"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateTowerSkinRequest": {
+                "description": "Payload for updating an existing TowerSkin. All fields optional.",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 191,
+                        "example": "Celestial Tower Deluxe"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.85
+                    },
+                    "eventName": {
+                        "type": "string",
+                        "example": "Guild Season Finale",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "BackgroundSkinCollection": {
+                "description": "Paginated list of background skins",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/BackgroundSkinResource"
+                        }
+                    },
+                    "links": {
+                        "properties": {
+                            "first": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/background-skins?page=1"
+                            },
+                            "last": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/background-skins?page=2"
+                            },
+                            "prev": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": null,
+                                "nullable": true
+                            },
+                            "next": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/background-skins?page=2",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "meta": {
+                        "properties": {
+                            "current_page": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "from": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "last_page": {
+                                "type": "integer",
+                                "example": 2
+                            },
+                            "path": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/background-skins"
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "to": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "total": {
+                                "type": "integer",
+                                "example": 62
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "BackgroundSkinResource": {
+                "description": "A background skin available in the API",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Intersteller"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.5
+                    },
+                    "eventName": {
+                        "type": "string",
+                        "example": "Intersteller"
+                    }
+                },
+                "type": "object"
+            },
+            "BonusCategoryResource": {
+                "description": "Grouping bucket for bonus types (Damage, Defense, Utility, Misc).",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Defense"
+                    }
+                },
+                "type": "object"
+            },
+            "BonusTypeCollection": {
+                "description": "Paginated list of bonus types",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/BonusTypeResource"
+                        }
+                    },
+                    "links": {
+                        "properties": {
+                            "first": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/bonus-types?page=1"
+                            },
+                            "last": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/bonus-types?page=3"
+                            },
+                            "prev": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": null,
+                                "nullable": true
+                            },
+                            "next": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/bonus-types?page=2",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "meta": {
+                        "properties": {
+                            "current_page": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "from": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "last_page": {
+                                "type": "integer",
+                                "example": 3
+                            },
+                            "path": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/bonus-types"
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "to": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "total": {
+                                "type": "integer",
+                                "example": 120
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "BonusTypeResource": {
+                "description": "Master definition of a bonus type",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Defense Absolute"
+                    },
+                    "unit": {
+                        "type": "string",
+                        "enum": [
+                            "percentage",
+                            "flat",
+                            "seconds"
+                        ],
+                        "example": "percentage"
+                    },
+                    "category": {
+                        "$ref": "#/components/schemas/BonusCategoryResource"
+                    }
+                },
+                "type": "object"
+            },
+            "GuardianCollection": {
+                "description": "Paginated list of Guardians",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/GuardianResource"
+                        }
+                    },
+                    "links": {
+                        "properties": {
+                            "first": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/guardians?page=1"
+                            },
+                            "last": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/guardians?page=2"
+                            },
+                            "prev": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": null,
+                                "nullable": true
+                            },
+                            "next": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/guardians?page=2",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "meta": {
+                        "properties": {
+                            "current_page": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "from": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "last_page": {
+                                "type": "integer",
+                                "example": 2
+                            },
+                            "path": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/guardians"
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "to": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "total": {
+                                "type": "integer",
+                                "example": 100
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "GuardianResource": {
+                "description": "Represents a Guardian available in the API",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Muse"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.006
+                    }
+                },
+                "type": "object"
+            },
+            "MenuCollection": {
+                "description": "Paginated list of Menus",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/MenuResource"
+                        }
+                    },
+                    "links": {
+                        "properties": {
+                            "first": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/menus?page=1"
+                            },
+                            "last": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/menus?page=2"
+                            },
+                            "prev": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": null,
+                                "nullable": true
+                            },
+                            "next": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/menus?page=2",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "meta": {
+                        "properties": {
+                            "current_page": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "from": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "last_page": {
+                                "type": "integer",
+                                "example": 2
+                            },
+                            "path": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/menus"
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "to": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "total": {
+                                "type": "integer",
+                                "example": 100
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "MenuResource": {
+                "description": "Represents a Menu available in the API",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Dark Being"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.006
+                    }
+                },
+                "type": "object"
+            },
+            "ProfileBannerCollection": {
+                "description": "Paginated list of ProfileBanners",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ProfileBannerResource"
+                        }
+                    },
+                    "links": {
+                        "properties": {
+                            "first": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/profile-banners?page=1"
+                            },
+                            "last": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/profile-banners?page=2"
+                            },
+                            "prev": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": null,
+                                "nullable": true
+                            },
+                            "next": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/profile-banners?page=2",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "meta": {
+                        "properties": {
+                            "current_page": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "from": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "last_page": {
+                                "type": "integer",
+                                "example": 2
+                            },
+                            "path": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/profile-banners"
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "to": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "total": {
+                                "type": "integer",
+                                "example": 100
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "ProfileBannerResource": {
+                "description": "Represents a ProfileBanner available in the API",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Mech World"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.006
+                    }
+                },
+                "type": "object"
+            },
+            "RelicBonusResource": {
+                "description": "Bonus as it appears on a relic (includes rolled value)",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/BonusTypeResource"
+                    },
+                    {
+                        "properties": {
+                            "value": {
+                                "type": "number",
+                                "format": "float",
+                                "example": 0.02
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            },
+            "RelicCollection": {
+                "description": "Paginated list of relics",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/RelicResource"
+                        }
+                    },
+                    "links": {
+                        "properties": {
+                            "first": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/relics?page=1"
+                            },
+                            "last": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/relics?page=5"
+                            },
+                            "prev": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": null,
+                                "nullable": true
+                            },
+                            "next": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/relics?page=2",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "meta": {
+                        "properties": {
+                            "current_page": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "from": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "last_page": {
+                                "type": "integer",
+                                "example": 5
+                            },
+                            "path": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/relics"
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "to": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "total": {
+                                "type": "integer",
+                                "example": 236
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "RelicResource": {
+                "description": "Single relic payload",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "No Spoon"
+                    },
+                    "tier": {
+                        "type": "string",
+                        "example": "Rare"
+                    },
+                    "unlockCondition": {
+                        "type": "string",
+                        "example": "Earn 350 medals Matrix event",
+                        "nullable": true
+                    },
+                    "bonuses": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/RelicBonusResource"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "SongCollection": {
+                "description": "Paginated list of songs",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/SongResource"
+                        }
+                    },
+                    "links": {
+                        "properties": {
+                            "first": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/songs?page=1"
+                            },
+                            "last": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/songs?page=2"
+                            },
+                            "prev": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": null,
+                                "nullable": true
+                            },
+                            "next": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/songs?page=2",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "meta": {
+                        "properties": {
+                            "current_page": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "from": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "last_page": {
+                                "type": "integer",
+                                "example": 2
+                            },
+                            "path": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/songs"
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "to": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "total": {
+                                "type": "integer",
+                                "example": 100
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "SongResource": {
+                "description": "Represents a song available in the API",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Epic Battle Theme"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.006
+                    }
+                },
+                "type": "object"
+            },
+            "TierCollection": {
+                "description": "Paginated list of tiers",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TierResource"
+                        }
+                    },
+                    "links": {
+                        "properties": {
+                            "first": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/tiers?page=1"
+                            },
+                            "last": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/tiers?page=3"
+                            },
+                            "prev": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": null,
+                                "nullable": true
+                            },
+                            "next": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/tiers?page=2",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "meta": {
+                        "properties": {
+                            "current_page": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "from": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "last_page": {
+                                "type": "integer",
+                                "example": 3
+                            },
+                            "path": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/tiers"
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "to": {
+                                "type": "integer",
+                                "example": 3
+                            },
+                            "total": {
+                                "type": "integer",
+                                "example": 6
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "TierResource": {
+                "description": "Lookup record for a tier",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Rare"
+                    }
+                },
+                "type": "object"
+            },
+            "TowerSkinCollection": {
+                "description": "Paginated list of tower skins",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TowerSkinResource"
+                        }
+                    },
+                    "links": {
+                        "properties": {
+                            "first": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/tower-skins?page=1"
+                            },
+                            "last": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/tower-skins?page=4"
+                            },
+                            "prev": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": null,
+                                "nullable": true
+                            },
+                            "next": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/tower-skins?page=2",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "meta": {
+                        "properties": {
+                            "current_page": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "from": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "last_page": {
+                                "type": "integer",
+                                "example": 4
+                            },
+                            "path": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/tower-skins"
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "to": {
+                                "type": "integer",
+                                "example": 50
+                            },
+                            "total": {
+                                "type": "integer",
+                                "example": 200
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "TowerSkinResource": {
+                "description": "A tower skin available in the API",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Celestial Tower"
+                    },
+                    "value": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 0.75
+                    },
+                    "eventName": {
+                        "type": "string",
+                        "example": "Guild Season Finale",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Background Skins"
+        },
+        {
+            "name": "Guardians"
+        },
+        {
+            "name": "Menus"
+        },
+        {
+            "name": "Profile Banners"
+        },
+        {
+            "name": "Relics"
+        },
+        {
+            "name": "Songs"
+        },
+        {
+            "name": "Tower Skins"
+        }
+    ]
+}

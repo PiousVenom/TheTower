@@ -1,0 +1,110 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Models;
+
+use Database\Factories\RelicFactory;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
+
+/**
+ * Class Relic.
+ *
+ * Represents a unique relic that players can own or discover.
+ * A relic belongs to a single Tier and (currently) carries exactly one bonus
+ * defined via the relic_bonus pivot table. The pivot table enforces
+ * a UNIQUE(relic_id) constraint so that only one bonus exists today, while
+ * still allowing the schema to evolve to many‑to‑many later with a single
+ * migration that drops that unique key.
+ *
+ * @property int                        $id
+ * @property string                     $name
+ * @property int                        $tier_id
+ * @property string|null                $unlock_condition
+ * @property Carbon|null                $created_at
+ * @property Carbon|null                $updated_at
+ * @property Carbon|null                $deleted_at
+ * @property RelicBonus|null            $pivot
+ * @property Collection<int, BonusType> $bonuses
+ * @property int|null                   $bonuses_count
+ * @property Tier                       $tier
+ *
+ * @method static RelicFactory          factory($count = null, $state = [])
+ * @method static Builder<static>|Relic newModelQuery()
+ * @method static Builder<static>|Relic newQuery()
+ * @method static Builder<static>|Relic onlyTrashed()
+ * @method static Builder<static>|Relic query()
+ * @method static Builder<static>|Relic whereCreatedAt($value)
+ * @method static Builder<static>|Relic whereDeletedAt($value)
+ * @method static Builder<static>|Relic whereId($value)
+ * @method static Builder<static>|Relic whereName($value)
+ * @method static Builder<static>|Relic whereTierId($value)
+ * @method static Builder<static>|Relic whereUnlockCondition($value)
+ * @method static Builder<static>|Relic whereUpdatedAt($value)
+ * @method static Builder<static>|Relic withTrashed()
+ * @method static Builder<static>|Relic withoutTrashed()
+ * @method static bool                  restore()
+ * @method        bool                  restore()
+ *
+ * @mixin Eloquent
+ */
+class Relic extends Model
+{
+    /** @use HasFactory<RelicFactory> */
+    use HasFactory;
+    use SoftDeletes;
+
+    /**
+     * Mass‑assignable attributes.
+     */
+    protected $fillable = [
+        'name',
+        'tier_id',
+        'unlock_condition',
+    ];
+
+    /**
+     * Convenience accessor for the *single* bonus a relic has today.
+     */
+    public function bonus(): ?BonusType
+    {
+        return $this->bonuses()->first();
+    }
+
+    /* ----------------------------------------------------------------- */
+    /* Relationships */
+    /* ----------------------------------------------------------------- */
+
+    /**
+     * Bonus types linked via the relic_bonus pivot.
+     *
+     * @return BelongsToMany<BonusType, $this, RelicBonus>
+     */
+    public function bonuses(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            BonusType::class,
+            'relic_bonus'
+        )
+            ->using(RelicBonus::class)
+            ->withPivot(['value']);
+    }
+
+    /**
+     * Tier to which this relic belongs.
+     *
+     * @return BelongsTo<Tier, $this>
+     */
+    public function tier(): BelongsTo
+    {
+        return $this->belongsTo(Tier::class);
+    }
+}
