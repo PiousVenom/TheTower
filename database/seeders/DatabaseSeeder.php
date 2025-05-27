@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             MenuSeeder::class,
             ProfileBannerSeeder::class,
             GuardianSeeder::class,
+            LabCategorySeeder::class,
         ]);
     }
 }
