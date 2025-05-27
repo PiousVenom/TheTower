@@ -29,8 +29,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *             type="object",
  *
  *             @OA\Property(property="level",            type="integer", example=5),
- *             @OA\Property(property="duration_seconds", type="integer", example=3_600),
- *             @OA\Property(property="cost",             type="number",  format="float", example=1_500.00)
+ *             @OA\Property(property="duration_seconds", type="integer", example=3600),
+ *             @OA\Property(property="cost",             type="number",  format="float", example=1500.00)
  *         )
  *     )
  * )
