@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Requests\Api\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateLabRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdateLabRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,6 +25,9 @@ class UpdateLabRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'lab_category_id' => ['sometimes', 'exists:lab_categories,id'],
+            'name' => ['sometimes', 'string', 'max:191', Rule::unique('labs', 'name')->ignore($this->lab->id)],
+            'description' => ['nullable', 'string'],
         ];
     }
 }
