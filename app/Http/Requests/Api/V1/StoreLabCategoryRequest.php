@@ -13,7 +13,7 @@ class StoreLabCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,9 +21,30 @@ class StoreLabCategoryRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+        public function rules(): array
     {
         return [
+            'name' => ['required', 'string', 'max:191', 'unique:lab_categories,name'],
+            'description' => ['nullable', 'string'],
         ];
     }
+
+
+    /**
+     * Get custom error messages for validator errors.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'The name field is required.',
+            'name.unique' => 'The name has already been taken.',
+        
+    
+}
+}
+
+
+    
 }
