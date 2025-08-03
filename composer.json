@@ -6,9 +6,9 @@
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
-        "php": "^8.4p",
+       "php": "^8.4",
         "laravel/framework": "^v12.14.1",
-        "laravel/sanctum": "^v4.1.1",
+      "laravel/sanctum": "^v4.1.1",
         "laravel/tinker": "^2.10.1",
         "spatie/laravel-permission": "^6.18.0",
         "darkaonline/l5-swagger": "9.0.1"
