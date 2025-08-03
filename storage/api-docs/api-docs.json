@@ -128,6 +128,64 @@
                 }
             }
         },
+        "/labs": {
+            "get": {
+                "tags": [
+                    "Labs"
+                ],
+                "summary": "List labs",
+                "description": "List labs (paginated).",
+                "operationId": "9d29ad8bdd0990185f7fbce162170789",
+                "responses": {
+                    "200": {
+                        "description": "Paginated list of labs",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LabCollection"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/labs/{id}": {
+            "get": {
+                "tags": [
+                    "Labs"
+                ],
+                "summary": "Get a lab",
+                "description": "Retrieve a single lab.",
+                "operationId": "4760d0489e4f24c699642db5e92a1ee3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lab detail",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LabResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
         "/menus": {
             "get": {
                 "tags": [
@@ -1118,6 +1176,141 @@
                 },
                 "type": "object"
             },
+            "LabCategoryResource": {
+                "description": "Grouping bucket for bonus types (Damage, Defense, Utility, Misc).",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Defense"
+                    }
+                },
+                "type": "object"
+            },
+            "LabCollection": {
+                "description": "Paginated list of Laboratories",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/LabResource"
+                        }
+                    },
+                    "links": {
+                        "properties": {
+                            "first": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/labs?page=1"
+                            },
+                            "last": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/labs?page=4"
+                            },
+                            "prev": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": null,
+                                "nullable": true
+                            },
+                            "next": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/labs?page=2",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "meta": {
+                        "properties": {
+                            "current_page": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "from": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "last_page": {
+                                "type": "integer",
+                                "example": 4
+                            },
+                            "path": {
+                                "type": "string",
+                                "format": "uri",
+                                "example": "/api/v1/labs"
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "example": 15
+                            },
+                            "to": {
+                                "type": "integer",
+                                "example": 15
+                            },
+                            "total": {
+                                "type": "integer",
+                                "example": 60
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "LabResource": {
+                "description": "Represents a Laboratory with its category and per-level stats",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Workshop A"
+                    },
+                    "lab_category": {
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "example": 3
+                            },
+                            "name": {
+                                "type": "string",
+                                "example": "Workshop"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "levels": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "level": {
+                                    "type": "integer",
+                                    "example": 5
+                                },
+                                "duration_seconds": {
+                                    "type": "integer",
+                                    "example": 3600
+                                },
+                                "cost": {
+                                    "type": "number",
+                                    "format": "float",
+                                    "example": 1500
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
             "MenuCollection": {
                 "description": "Paginated list of Menus",
                 "properties": {
@@ -1706,6 +1899,9 @@
         },
         {
             "name": "Guardians"
+        },
+        {
+            "name": "Labs"
         },
         {
             "name": "Menus"

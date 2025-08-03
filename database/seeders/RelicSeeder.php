@@ -501,6 +501,20 @@ class RelicSeeder extends Seeder
                 'unlock_condition' => 'Premium 550 medals Invaders event',
             ],
             [
+                'name'             => 'Honey Jar',
+                'tier'             => 'Rare',
+                'bonus_type'       => 'Attack Speed',
+                'value'            => 1,
+                'unlock_condition' => 'Earn 350 medals Honey event',
+            ],
+            [
+                'name'             => 'Heavenly Sweet',
+                'tier'             => 'Rare',
+                'bonus_type'       => 'Health',
+                'value'            => 2,
+                'unlock_condition' => 'Premium 550 medals Honey event',
+            ],
+            [
                 'name'             => 'Red Pill',
                 'tier'             => 'Epic',
                 'bonus_type'       => 'Health',
@@ -940,6 +954,20 @@ class RelicSeeder extends Seeder
                 'bonus_type'       => 'Ultimate Damage',
                 'value'            => 5,
                 'unlock_condition' => 'Premium 1100 medals Invaders event',
+            ],
+            [
+                'name'             => 'Honey Society',
+                'tier'             => 'Epic',
+                'bonus_type'       => 'Knockback Force',
+                'value'            => 5,
+                'unlock_condition' => 'Earn 700 medals Honey event',
+            ],
+            [
+                'name'             => 'The Queen',
+                'tier'             => 'Epic',
+                'bonus_type'       => 'Coins',
+                'value'            => 5,
+                'unlock_condition' => 'Premium 1100 medals Honey event',
             ],
             [
                 'name'             => 'Champion Badge',
