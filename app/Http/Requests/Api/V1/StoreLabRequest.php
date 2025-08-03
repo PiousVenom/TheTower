@@ -13,7 +13,7 @@ class StoreLabRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,9 +21,12 @@ class StoreLabRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+        public function rules(): array
     {
         return [
+            'lab_category_id' => ['required', 'exists:lab_categories,id'],
+            'name' => ['required', 'string', 'max:191', 'unique:labs,name'],
+            'description' => ['nullable', 'string'],
         ];
     }
-}
+
